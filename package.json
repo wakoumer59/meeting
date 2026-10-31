@@ -1,0 +1,10 @@
+{
+  "name": "gather-invitation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A polished meeting invitation page ready to be served in production.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  }
+}
