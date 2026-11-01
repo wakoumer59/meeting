@@ -21,19 +21,25 @@
   <body>
     <div class="page-shell">
       <header class="site-header">
-        <a class="brand" href="#" aria-label="Gather home">
+        <a class="brand" href="#" aria-label="Grace Senior Citizens &amp; Community Hub home" data-i18n-attr="aria-label:homeLabel">
           <span class="brand-mark" aria-hidden="true">G</span>
           <span>Grace Senior Citizens &amp; Community Hub<span class="brand-period">.</span></span>
         </a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="የገጽ ማውጫን ክፈት" data-i18n-attr="aria-label:menuLabel">
           <span></span><span></span><span class="sr-only">Toggle navigation</span>
         </button>
-        <nav class="site-nav" id="primary-nav" aria-label="Main navigation">
-          <a href="#details">The details</a>
-          <a href="#about">The gathering</a>
-          <a href="#how-it-works">How it works</a>
+        <nav class="site-nav" id="primary-nav" aria-label="ዋና ማውጫ" data-i18n-attr="aria-label:navLabel">
+          <a href="#details" data-i18n="navMeetingDate">የመሰብሰቢያ ቀን</a>
+          <a href="#contact" data-i18n="navContact">ያግኙን</a>
+          <label class="language-picker">
+            <span class="sr-only" data-i18n="languageLabel">ቋንቋ ይምረጡ</span>
+            <select id="language-select">
+              <option value="am">አማርኛ</option>
+              <option value="en">English</option>
+            </select>
+          </label>
           <button class="nav-cta" type="button" data-open-editor>
-            Create an invitation <span aria-hidden="true">↗</span>
+            <span data-i18n="navCreateInvitation">ግብዣ ያዘጋጁ</span> <span aria-hidden="true">↗</span>
           </button>
         </nav>
       </header>
@@ -44,50 +50,22 @@
           <div class="hero-main">
             <div class="hero-content">
               <p class="hero-org">Grace Senior Citizens &amp; Community Hub</p>
-              <p class="eyebrow"><span class="eyebrow-line"></span> የግብዣ መልዕክት</p>
+              <p class="eyebrow"><span class="eyebrow-line"></span> <span data-i18n="heroEyebrow">የግብዣ መልዕክት</span></p>
               <h1 id="event-title">የግሬስ ማዕከል የመተዋወቂያና የምክክር መርሃ ግብር</h1>
               <p class="hero-copy" id="event-description">
                 በክብር ተጋብዘዋል! እድሜ መጨመር የሕይወት ተፈጥሯዊ ጉዞ ነው። ነገር ግን ከዕድሜ ጋር የሚመጡ ለውጦችን እንዴት እንደምንቀበል፣ እንዴት እንደምንዘጋጅና በክብር፣ በጤናና በማኅበራዊ ትስስር የተሞላ ሕይወት እንዴት መኖር እንደምንችል ብዙ ልናስብበት የሚገባ ጉዳይ ነው።
               </p>
-
-              <div class="event-details" id="details" aria-label="የዝግጅቱ ዝርዝሮች">
-                <div class="detail-item">
-                  <span class="detail-icon icon-pin" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M19 10.1c0 5-7 11-7 11s-7-6-7-11a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.3"/></svg>
-                  </span>
-                  <span class="detail-label">ቦታ</span>
-                  <span class="detail-value" id="event-location">ይገለጻል</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-icon icon-people" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19v-1.5a5.5 5.5 0 0 1 11 0V19Zm12.2-13a3 3 0 0 1 0 5.8m1 2.2a4.5 4.5 0 0 1 3.8 4.5V19h-3"/></svg>
-                  </span>
-                  <span class="detail-label">እንግዶች</span>
-                  <span class="detail-value">በክብር ተጋብዘዋል</span>
-                </div>
-              </div>
-
-              <div class="hero-actions">
-                <button class="button button-light" type="button" data-open-rsvp>
-                  ምላሽ ይስጡ <span aria-hidden="true">↗</span>
-                </button>
-                <button class="button button-outline" type="button" id="calendar-button">
-                  <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4.5" width="14" height="13" rx="2.5"/><path d="M6.5 2.5v4m7-4v4M3 8h14"/></svg>
-                  ወደ ቀን መቁጠሪያ ጨምር
-                </button>
-              </div>
-              <p class="rsvp-note"><span aria-hidden="true">✦</span> ሀሳብዎንና ምክርዎን እንዲያጋሩን በክብር እንጋብዝዎታለን።</p>
             </div>
 
             <div class="hero-art">
-              <div class="art-caption"><span class="art-caption-dot"></span> አብረን እንወያይ</div>
-              <img class="meeting-photo" src="meeting-people.png" alt="ስድስት ሰዎች በጠረጴዛ ዙሪያ ተሰብስበው ሲወያዩ" />
-              <div class="art-note"><span>✦</span> አብረን ስለ እድሜ ባለጸጋነት<br />እንድገፍ እናስብ።</div>
+              <div class="art-caption"><span class="art-caption-dot"></span> <span data-i18n="artCaption">አብረን እንወያይ</span></div>
+              <img class="meeting-photo" src="meeting-people.png" alt="ስድስት ሰዎች በጠረጴዛ ዙሪያ ተሰብስበው ሲወያዩ" data-i18n-attr="alt:artAlt" />
+              <div class="art-note"><span>✦</span> <span data-i18n="artNote">አብረን ስለ እድሜ ባለጸጋነት<br />እንድገፍ እናስብ።</span></div>
             </div>
           </div>
 
-          <section class="invitation-letter" aria-label="Bilingual invitation messages">
-            <details class="invitation-language amharic-invitation" lang="am">
+          <section class="invitation-letter" id="invitation-letter" aria-label="የግብዣ መልዕክት" data-i18n-attr="aria-label:invitationSectionLabel">
+            <details class="invitation-language amharic-invitation" lang="am" data-page-language="am">
               <summary class="invitation-card-summary">
                 <span class="language-label">*</span>
                 <h2>የግብዣ መልዕክት</h2>
@@ -123,7 +101,7 @@
               </div>
             </details>
 
-            <details class="invitation-language english-invitation" lang="en">
+            <details class="invitation-language english-invitation" lang="en" data-page-language="en" hidden>
               <summary class="invitation-card-summary">
                 <span class="language-label">*</span>
                 <h2>Invitation Message</h2>
@@ -177,84 +155,112 @@
           <div class="hero-bottom-wave" aria-hidden="true"></div>
         </section>
 
-        <section class="why-section" id="about">
-          <div class="section-kicker">DATE &amp; TIME</div>
-          <div class="event-details" aria-label="የዝግጅቱ ዝርዝሮች">
+        <section class="event-section" id="details" lang="am">
+          <div class="event-section-content">
+            <div class="section-kicker" data-i18n="eventSectionKicker">የዝግጅቱ ዝርዝሮች</div>
+            <h2 data-i18n="eventSectionTitle">ቀንና ሰዓት</h2>
+
+            <div class="countdown-panel">
+              <p class="countdown-title" data-i18n="countdownTitle">ቀጣዩ ስብሰባ የሚቀረው</p>
+              <p class="countdown-status" id="countdown-status" role="status" aria-live="polite" data-i18n="countdownPrompt">ቀንና ሰዓት በግብዣው ላይ ሲጨመሩ ቆጠራው ይጀምራል።</p>
+              <div class="countdown-grid" id="countdown-grid" hidden>
+                <div class="countdown-unit">
+                  <span class="countdown-value" id="countdown-days">00</span>
+                  <span class="countdown-label" data-i18n="countdownDays">ቀን</span>
+                </div>
+                <div class="countdown-unit">
+                  <span class="countdown-value" id="countdown-hours">00</span>
+                  <span class="countdown-label" data-i18n="countdownHours">ሰዓት</span>
+                </div>
+                <div class="countdown-unit">
+                  <span class="countdown-value" id="countdown-minutes">00</span>
+                  <span class="countdown-label" data-i18n="countdownMinutes">ደቂቃ</span>
+                </div>
+                <div class="countdown-unit">
+                  <span class="countdown-value" id="countdown-seconds">00</span>
+                  <span class="countdown-label" data-i18n="countdownSeconds">ሰከንድ</span>
+                </div>
+              </div>
+            </div>
+
+          <div class="event-details" aria-label="የዝግጅቱ ዝርዝሮች" data-i18n-attr="aria-label:eventDetailsLabel">
             <div class="detail-item">
               <span class="detail-icon icon-calendar" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="15" rx="3"/><path d="M7.5 3.5v4m9-4v4M3.5 10h17m-12 4h.01m4 0h.01m4 0h.01m-8 3.5h.01m4 0h.01"/></svg>
               </span>
-              <span class="detail-label">ቀን</span>
+              <span class="detail-label" data-i18n="dateLabel">ቀን</span>
               <span class="detail-value" id="event-date">ይገለጻል</span>
             </div>
             <div class="detail-item">
               <span class="detail-icon icon-clock" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg>
               </span>
-              <span class="detail-label">ሰዓት</span>
+              <span class="detail-label" data-i18n="timeLabel">ሰዓት</span>
               <span class="detail-value" id="event-time">ይገለጻል</span>
             </div>
+            <div class="detail-item">
+              <span class="detail-icon icon-pin" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M19 10.1c0 5-7 11-7 11s-7-6-7-11a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.3"/></svg>
+              </span>
+              <span class="detail-label" data-i18n="locationLabel">ቦታ</span>
+              <span class="detail-value" id="event-location">Bulbula</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-icon icon-people" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19v-1.5a5.5 5.5 0 0 1 11 0V19Zm12.2-13a3 3 0 0 1 0 5.8m1 2.2a4.5 4.5 0 0 1 3.8 4.5V19h-3"/></svg>
+              </span>
+              <span class="detail-label" data-i18n="guestsLabel">እንግዶች</span>
+              <span class="detail-value" data-i18n="guestsValue">በክብር ተጋብዘዋል</span>
+            </div>
+          </div>
+
+          <div class="hero-actions event-actions">
+            <button class="button button-light" type="button" data-open-rsvp>
+              <span data-i18n="rsvpButton">ምላሽ ይስጡ</span> <span aria-hidden="true">↗</span>
+            </button>
+            <button class="button button-outline" type="button" id="calendar-button">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4.5" width="14" height="13" rx="2.5"/><path d="M6.5 2.5v4m7-4v4M3 8h14"/></svg>
+              <span data-i18n="calendarButton">ወደ ቀን መቁጠሪያ ጨምር</span>
+            </button>
+          </div>
+          <p class="rsvp-note"><span aria-hidden="true">✦</span> <span data-i18n="eventNote">ሀሳብዎንና ምክርዎን እንዲያጋሩን በክብር እንጋብዝዎታለን።</span></p>
           </div>
         </section>
 
-        <section class="steps-section" id="how-it-works">
-          <div class="steps-heading">
-            <div>
-              <div class="section-kicker">SIMPLE AS THAT</div>
-              <h2>Save the date.<br /><em>Bring your ideas.</em></h2>
-            </div>
-            <p>Everything you need for our time together, all in one place.</p>
-          </div>
-          <div class="steps-grid">
-            <article class="step-card">
-              <span class="step-number">01</span>
-              <span class="step-icon" aria-hidden="true">↗</span>
-              <h3>Save your seat</h3>
-              <p>Let us know you can make it. We’ll keep a place warm just for you.</p>
-            </article>
-            <article class="step-card">
-              <span class="step-number">02</span>
-              <span class="step-icon" aria-hidden="true">◷</span>
-              <h3>Mark your calendar</h3>
-              <p>Add the details to your calendar so the day doesn’t slip away.</p>
-            </article>
-            <article class="step-card">
-              <span class="step-number">03</span>
-              <span class="step-icon" aria-hidden="true">✳</span>
-              <h3>Show up as you are</h3>
-              <p>Bring your curiosity, your perspective, and an open mind.</p>
-            </article>
-          </div>
+        <section class="contact-section" id="contact" lang="am">
+          <p class="section-kicker" data-i18n="contactKicker">ያግኙን</p>
+          <h2 data-i18n="contactTitle">Grace Senior Citizens &amp; Community Hub</h2>
+          <p data-i18n="contactDescription">የመገኛ መረጃ በቅርቡ ይጨመራል።</p>
         </section>
       </main>
 
       <footer class="site-footer">
-        <a class="brand footer-brand" href="#" aria-label="Gather home">
+        <a class="brand footer-brand" href="#" aria-label="Grace Senior Citizens &amp; Community Hub home" data-i18n-attr="aria-label:homeLabel">
           <span class="brand-mark" aria-hidden="true">G</span>
           <span>Grace Senior Citizens &amp; Community Hub<span class="brand-period">.</span></span>
         </a>
-        <p>Good things happen when we get together.</p>
+        <p data-i18n="footerNote">አብረን ስንሆን መልካም ነገሮች ይፈጠራሉ።</p>
         <span class="footer-sparkle" aria-hidden="true">✳</span>
       </footer>
     </div>
 
     <dialog class="modal" id="rsvp-modal" aria-labelledby="rsvp-title">
       <form method="dialog" class="modal-close-form">
-        <button class="modal-close" aria-label="Close dialog">×</button>
+        <button class="modal-close" aria-label="ዝጋ" data-i18n-attr="aria-label:closeDialog">×</button>
       </form>
       <div class="modal-content">
-        <p class="section-kicker">በክብር ቦታ አዘጋጅተናል</p>
-        <h2 id="rsvp-title">በዝግጅቱ <em>ይገኛሉ?</em></h2>
+        <p class="section-kicker" data-i18n="rsvpKicker">በክብር ቦታ አዘጋጅተናል</p>
+        <h2 id="rsvp-title"><span data-i18n="rsvpTitle">በዝግጅቱ</span> <em data-i18n="rsvpQuestion">ይገኛሉ?</em></h2>
         <p class="modal-description">ቀን · ሰዓት · ቦታ</p>
-        <div class="rsvp-options" role="group" aria-label="የመገኘት ምላሽ ይምረጡ">
-          <button class="rsvp-option" type="button" data-rsvp="እመጣለሁ፣ አመሰግናለሁ!">
-            <span aria-hidden="true">✦</span><strong>እመጣለሁ</strong>
+        <div class="rsvp-options" role="group" aria-label="የመገኘት ምላሽ ይምረጡ" data-i18n-attr="aria-label:rsvpOptionsLabel">
+          <button class="rsvp-option" type="button" data-rsvp="attending">
+            <span aria-hidden="true">✦</span><strong data-i18n="rsvpAttend">እመጣለሁ</strong>
           </button>
-          <button class="rsvp-option" type="button" data-rsvp="መረጃውን አረጋግጬ እመልሳለሁ">
-            <span aria-hidden="true">◷</span><strong>አረጋግጬ እመልሳለሁ</strong>
+          <button class="rsvp-option" type="button" data-rsvp="maybe">
+            <span aria-hidden="true">◷</span><strong data-i18n="rsvpMaybe">አረጋግጬ እመልሳለሁ</strong>
           </button>
-          <button class="rsvp-option" type="button" data-rsvp="መገኘት አልችልም">
-            <span aria-hidden="true">↗</span><strong>መገኘት አልችልም</strong>
+          <button class="rsvp-option" type="button" data-rsvp="declining">
+            <span aria-hidden="true">↗</span><strong data-i18n="rsvpDecline">መገኘት አልችልም</strong>
           </button>
         </div>
         <p class="rsvp-confirmation" id="rsvp-confirmation" role="status" aria-live="polite"></p>
@@ -263,38 +269,38 @@
 
     <dialog class="modal editor-modal" id="editor-modal" aria-labelledby="editor-title">
       <form method="dialog" class="modal-close-form">
-        <button class="modal-close" aria-label="Close dialog">×</button>
+        <button class="modal-close" aria-label="ዝጋ" data-i18n-attr="aria-label:closeDialog">×</button>
       </form>
       <div class="modal-content">
-        <p class="section-kicker">የግብዣ መረጃዎን ያስተካክሉ</p>
-        <h2 id="editor-title">የግብዣ <em>መረጃ ያስተካክሉ</em></h2>
-        <p class="modal-description">ለውጦቹ በዚህ አሳሽ ውስጥ ብቻ ይቀመጣሉ።</p>
+        <p class="section-kicker" data-i18n="editorKicker">የግብዣ መረጃዎን ያስተካክሉ</p>
+        <h2 id="editor-title"><span data-i18n="editorTitle">የግብዣ</span> <em data-i18n="editorTitleAccent">መረጃ ያስተካክሉ</em></h2>
+        <p class="modal-description" data-i18n="editorDescription">ለውጦቹ በዚህ አሳሽ ውስጥ ብቻ ይቀመጣሉ።</p>
         <form class="editor-form" id="event-form">
           <label>
-            የግብዣ ርዕስ
+            <span data-i18n="editorEventTitle">የግብዣ ርዕስ</span>
             <input name="title" type="text" value="የግሬስ ማዕከል የመተዋወቂያና የምክክር መርሃ ግብር" required />
           </label>
           <label>
-            አጭር መልዕክት
+            <span data-i18n="editorMessage">አጭር መልዕክት</span>
             <textarea name="description" rows="3" required>በክብር ተጋብዘዋል! እድሜ መጨመር የሕይወት ተፈጥሯዊ ጉዞ ነው። ነገር ግን ከዕድሜ ጋር የሚመጡ ለውጦችን እንዴት እንደምንቀበል፣ እንዴት እንደምንዘጋጅና በክብር፣ በጤናና በማኅበራዊ ትስስር የተሞላ ሕይወት እንዴት መኖር እንደምንችል ብዙ ልናስብበት የሚገባ ጉዳይ ነው።</textarea>
           </label>
           <div class="form-row">
             <label>
-              ቀን
+              <span data-i18n="dateLabel">ቀን</span>
               <input name="date" type="date" value="" />
             </label>
             <label>
-              ሰዓት
+              <span data-i18n="timeLabel">ሰዓት</span>
               <input name="time" type="time" value="" />
             </label>
           </div>
           <label>
-            ቦታ
-            <input name="location" type="text" value="" />
+            <span data-i18n="locationLabel">ቦታ</span>
+            <input name="location" type="text" value="Bulbula" />
           </label>
           <div class="editor-actions">
-            <button class="button button-blue" type="submit">የግብዣ መረጃውን አዘምን <span aria-hidden="true">↗</span></button>
-            <button class="button button-quiet" id="share-button" type="button">የግብዣ ሊንክ ቅዳ</button>
+            <button class="button button-blue" type="submit"><span data-i18n="editorSave">የግብዣ መረጃውን አዘምን</span> <span aria-hidden="true">↗</span></button>
+            <button class="button button-quiet" id="share-button" type="button" data-i18n="editorShare">የግብዣ ሊንክ ቅዳ</button>
           </div>
           <p class="form-status" id="editor-status" role="status" aria-live="polite"></p>
         </form>
