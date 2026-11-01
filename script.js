@@ -49,7 +49,7 @@ const translations = {
     locationLabel: "ቦታ",
     guestsLabel: "እንግዶች",
     guestsValue: "በክብር ተጋብዘዋል",
-    rsvpButton: "ምላሽ ይስጡ",
+    rsvpButton: "በዝግጅቱ ይገኛሉ?",
     calendarButton: "ወደ ቀን መቁጠሪያ ጨምር",
     eventNote: "ሀሳብዎንና ምክርዎን እንዲያጋሩን በክብር እንጋብዝዎታለን።",
     contactKicker: "ያግኙን",
@@ -66,6 +66,9 @@ const translations = {
     rsvpTitle: "በዝግጅቱ",
     rsvpQuestion: "ይገኛሉ?",
     rsvpOptionsLabel: "የመገኘት ምላሽ ይምረጡ",
+    rsvpResponses: "ምላሽ",
+    rsvpLocalOnly: "ምላሾች በዚህ አሳሽ ብቻ ይቆጠራሉ።",
+    rsvpStorageError: "ምላሾችን ማስቀመጥ ወይም ማሳየት አልተቻለም።",
     rsvpAttend: "እመጣለሁ",
     rsvpMaybe: "አረጋግጬ እመልሳለሁ",
     rsvpDecline: "መገኘት አልችልም",
@@ -126,7 +129,7 @@ const translations = {
     locationLabel: "Location",
     guestsLabel: "Guests",
     guestsValue: "You are warmly invited",
-    rsvpButton: "RSVP",
+    rsvpButton: "Will you join us?",
     calendarButton: "Add to calendar",
     eventNote: "We warmly invite you to join us and share your thoughts and advice.",
     contactKicker: "CONTACT",
@@ -143,6 +146,9 @@ const translations = {
     rsvpTitle: "Will you",
     rsvpQuestion: "join us?",
     rsvpOptionsLabel: "Choose your RSVP",
+    rsvpResponses: "responses",
+    rsvpLocalOnly: "Responses are counted on this device only.",
+    rsvpStorageError: "Responses could not be saved or loaded.",
     rsvpAttend: "Count me in",
     rsvpMaybe: "Maybe",
     rsvpDecline: "Can't make it",
@@ -175,6 +181,7 @@ const eventForm = document.querySelector("#event-form");
 const editorModal = document.querySelector("#editor-modal");
 const rsvpModal = document.querySelector("#rsvp-modal");
 const rsvpConfirmation = document.querySelector("#rsvp-confirmation");
+const rsvpStorageStatus = document.querySelector("#rsvp-storage-status");
 const editorStatus = document.querySelector("#editor-status");
 const menuToggle = document.querySelector(".menu-toggle");
 const siteNav = document.querySelector("#primary-nav");
@@ -182,9 +189,41 @@ const languageToggle = document.querySelector("#language-toggle");
 const languageMenu = document.querySelector("#language-menu");
 let meeting = loadEvent();
 let currentLanguage = loadLanguage();
+const rsvpCountsStorageKey = "gather-rsvp-counts";
+let rsvpCountsError = false;
+let rsvpCounts = loadRsvpCounts();
 
 function t(key) {
   return translations[currentLanguage][key];
+}
+
+function loadRsvpCounts() {
+  try {
+    const savedCounts = localStorage.getItem(rsvpCountsStorageKey);
+    if (!savedCounts) return { attending: 0, maybe: 0, declining: 0 };
+
+    const counts = JSON.parse(savedCounts);
+    const isValid = counts
+      && ["attending", "maybe", "declining"].every(
+        (key) => Number.isSafeInteger(counts[key]) && counts[key] >= 0,
+      );
+    if (!isValid) throw new Error("Saved RSVP counts have an invalid format.");
+    return counts;
+  } catch (error) {
+    rsvpCountsError = true;
+    console.error("Could not load RSVP counts.", error);
+    return null;
+  }
+}
+
+function renderRsvpCounts() {
+  document.querySelectorAll("[data-rsvp-count]").forEach((element) => {
+    const count = rsvpCounts?.[element.dataset.rsvpCount];
+    element.textContent = rsvpCountsError
+      ? "—"
+      : `${new Intl.NumberFormat(currentLanguage === "am" ? "am-ET" : "en").format(count)} ${t("rsvpResponses")}`;
+  });
+  rsvpStorageStatus.textContent = rsvpCountsError ? t("rsvpStorageError") : "";
 }
 
 function loadLanguage() {
@@ -233,6 +272,7 @@ function setLanguage(language) {
   if (rsvpConfirmation.dataset.responseKey) {
     rsvpConfirmation.textContent = t(rsvpConfirmation.dataset.responseKey);
   }
+  renderRsvpCounts();
   try {
     localStorage.setItem(languageStorageKey, language);
   } catch (error) {
@@ -423,12 +463,25 @@ document.querySelectorAll(".modal").forEach((dialog) => {
 
 document.querySelectorAll("[data-rsvp]").forEach((button) => {
   button.addEventListener("click", () => {
-    const responseKey = `rsvpResponse${button.dataset.rsvp[0].toUpperCase()}${button.dataset.rsvp.slice(1)}`;
-    try {
-      localStorage.setItem("gather-rsvp", button.dataset.rsvp);
-    } catch (error) {
-      console.error("Could not save your RSVP.", error);
+    if (!rsvpCounts || rsvpCountsError) {
+      rsvpStorageStatus.textContent = t("rsvpStorageError");
+      return;
     }
+
+    const response = button.dataset.rsvp;
+    if (!Object.hasOwn(rsvpCounts, response)) return;
+    const updatedCounts = { ...rsvpCounts, [response]: rsvpCounts[response] + 1 };
+    try {
+      localStorage.setItem(rsvpCountsStorageKey, JSON.stringify(updatedCounts));
+    } catch (error) {
+      console.error("Could not save RSVP counts.", error);
+      rsvpStorageStatus.textContent = t("rsvpStorageError");
+      return;
+    }
+
+    rsvpCounts = updatedCounts;
+    renderRsvpCounts();
+    const responseKey = `rsvpResponse${button.dataset.rsvp[0].toUpperCase()}${button.dataset.rsvp.slice(1)}`;
     rsvpConfirmation.dataset.responseKey = responseKey;
     rsvpConfirmation.textContent = t(responseKey);
   });

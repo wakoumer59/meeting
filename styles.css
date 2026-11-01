@@ -436,11 +436,14 @@ body[data-language="en"] .contact-section .contact-intro { font-family: var(--sa
 .modal h2 { margin: 12px 0 7px; font-size: 34px; }
 .modal-description { margin: 0 0 24px; color: #7b899a; font-size: 12px; line-height: 1.7; }
 .rsvp-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.rsvp-option { display: flex; min-height: 93px; flex-direction: column; align-items: flex-start; justify-content: space-between; padding: 14px 13px; border: 1px solid #e5ebf3; border-radius: 12px; color: #29486f; background: #fff; text-align: left; transition: border-color .2s ease, background .2s ease, transform .2s ease; }
+.rsvp-local-note { margin: -15px 0 19px; color: #7b899a; font-size: 11px; line-height: 1.6; }
+.rsvp-option { display: flex; min-height: 104px; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 8px; padding: 14px 13px; border: 1px solid #e5ebf3; border-radius: 12px; color: #29486f; background: #fff; text-align: left; transition: border-color .2s ease, background .2s ease, transform .2s ease; }
 .rsvp-option:hover, .rsvp-option:focus-visible { transform: translateY(-2px); border-color: #9ebde4; background: #f5f9ff; }
 .rsvp-option span { color: #b98751; font-size: 18px; }
 .rsvp-option strong { font-size: 11px; }
-.rsvp-confirmation, .form-status { min-height: 18px; margin: 15px 0 0; color: #276b55; font-size: 12px; line-height: 1.6; }
+.rsvp-option .rsvp-count { color: #6d7f94; font-size: 10px; font-variant-numeric: tabular-nums; }
+.rsvp-confirmation, .rsvp-storage-status, .form-status { min-height: 18px; margin: 15px 0 0; color: #276b55; font-size: 12px; line-height: 1.6; }
+.rsvp-storage-status:empty { display: none; }
 .editor-form { display: grid; gap: 14px; }
 .editor-form label { display: grid; gap: 6px; color: #40536c; font-size: 11px; font-weight: 600; }
 .editor-form input, .editor-form textarea { width: 100%; padding: 10px 12px; border: 1px solid #dfe6ef; border-radius: 9px; outline: 0; color: #243d60; background: #fff; font-size: 12px; font-weight: 400; }

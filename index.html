@@ -285,7 +285,7 @@
 
           <div class="hero-actions event-actions">
             <button class="button button-light" type="button" data-open-rsvp>
-              <span data-i18n="rsvpButton">ምላሽ ይስጡ</span> <span aria-hidden="true">↗</span>
+              <span data-i18n="rsvpButton">Will you join us?</span> <span aria-hidden="true">↗</span>
             </button>
             <button class="button button-outline" type="button" id="calendar-button">
               <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4.5" width="14" height="13" rx="2.5"/><path d="M6.5 2.5v4m7-4v4M3 8h14"/></svg>
@@ -342,17 +342,22 @@
         <p class="section-kicker" data-i18n="rsvpKicker">በክብር ቦታ አዘጋጅተናል</p>
         <h2 id="rsvp-title"><span data-i18n="rsvpTitle">በዝግጅቱ</span> <em data-i18n="rsvpQuestion">ይገኛሉ?</em></h2>
         <p class="modal-description">ቀን · ሰዓት · ቦታ</p>
+        <p class="rsvp-local-note" data-i18n="rsvpLocalOnly">Responses are counted on this device only.</p>
         <div class="rsvp-options" role="group" aria-label="የመገኘት ምላሽ ይምረጡ" data-i18n-attr="aria-label:rsvpOptionsLabel">
           <button class="rsvp-option" type="button" data-rsvp="attending">
             <span aria-hidden="true">✦</span><strong data-i18n="rsvpAttend">እመጣለሁ</strong>
+            <span class="rsvp-count" data-rsvp-count="attending" aria-live="polite">0 responses</span>
           </button>
           <button class="rsvp-option" type="button" data-rsvp="maybe">
             <span aria-hidden="true">◷</span><strong data-i18n="rsvpMaybe">አረጋግጬ እመልሳለሁ</strong>
+            <span class="rsvp-count" data-rsvp-count="maybe" aria-live="polite">0 responses</span>
           </button>
           <button class="rsvp-option" type="button" data-rsvp="declining">
             <span aria-hidden="true">↗</span><strong data-i18n="rsvpDecline">መገኘት አልችልም</strong>
+            <span class="rsvp-count" data-rsvp-count="declining" aria-live="polite">0 responses</span>
           </button>
         </div>
+        <p class="rsvp-storage-status" id="rsvp-storage-status" role="status" aria-live="polite"></p>
         <p class="rsvp-confirmation" id="rsvp-confirmation" role="status" aria-live="polite"></p>
       </div>
     </dialog>
