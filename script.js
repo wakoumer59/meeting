@@ -42,6 +42,22 @@ function formatTime(value) {
   return new Intl.DateTimeFormat("am-ET", { hour: "numeric", minute: "2-digit" }).format(date);
 }
 
+function formatEnglishDate(value) {
+  if (!value) return "To be announced";
+  const date = new Date(`${value}T12:00:00`);
+  if (Number.isNaN(date.getTime())) return "To be announced";
+  return new Intl.DateTimeFormat("en", { weekday: "long", month: "long", day: "numeric", year: "numeric" }).format(date);
+}
+
+function formatEnglishTime(value) {
+  if (!value) return "To be announced";
+  const [hours, minutes] = value.split(":").map(Number);
+  if (!Number.isInteger(hours) || !Number.isInteger(minutes)) return "To be announced";
+  const date = new Date();
+  date.setHours(hours, minutes, 0, 0);
+  return new Intl.DateTimeFormat("en", { hour: "numeric", minute: "2-digit" }).format(date);
+}
+
 function renderEvent() {
   const title = meeting.title.trim() || defaultEvent.title;
   const titleParts = title.split(/\s+/);
@@ -55,6 +71,12 @@ function renderEvent() {
   document.querySelector("#event-date").textContent = formatDate(meeting.date);
   document.querySelector("#event-time").textContent = formatTime(meeting.time);
   document.querySelector("#event-location").textContent = meeting.location || "ይገለጻል";
+  document.querySelector("#letter-date-am").textContent = formatDate(meeting.date);
+  document.querySelector("#letter-time-am").textContent = formatTime(meeting.time);
+  document.querySelector("#letter-location-am").textContent = meeting.location || "ይገለጻል";
+  document.querySelector("#letter-date-en").textContent = formatEnglishDate(meeting.date);
+  document.querySelector("#letter-time-en").textContent = formatEnglishTime(meeting.time);
+  document.querySelector("#letter-location-en").textContent = meeting.location || "To be announced";
   document.querySelector("#rsvp-modal .modal-description").textContent =
     `${formatDate(meeting.date)} · ${formatTime(meeting.time)} · ${meeting.location || "ይገለጻል"}`;
 }
