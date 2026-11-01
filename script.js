@@ -66,17 +66,22 @@ function renderEvent() {
   const secondLine = titleParts.slice(titleBreak).join(" ");
 
   document.querySelector("#event-title").innerHTML =
-    `${escapeHtml(firstLine)}${secondLine ? `<br /><em>${escapeHtml(secondLine)}</em>` : ""}`;
+    `<span class="hero-title-main">${escapeHtml(firstLine)}</span>${secondLine ? `<em class="hero-title-accent">${escapeHtml(secondLine)}</em>` : ""}`;
   document.querySelector("#event-description").textContent = meeting.description;
   document.querySelector("#event-date").textContent = formatDate(meeting.date);
   document.querySelector("#event-time").textContent = formatTime(meeting.time);
   document.querySelector("#event-location").textContent = meeting.location || "ይገለጻል";
-  document.querySelector("#letter-date-am").textContent = formatDate(meeting.date);
-  document.querySelector("#letter-time-am").textContent = formatTime(meeting.time);
-  document.querySelector("#letter-location-am").textContent = meeting.location || "ይገለጻል";
-  document.querySelector("#letter-date-en").textContent = formatEnglishDate(meeting.date);
-  document.querySelector("#letter-time-en").textContent = formatEnglishTime(meeting.time);
-  document.querySelector("#letter-location-en").textContent = meeting.location || "To be announced";
+  [
+    ["#letter-date-am", formatDate(meeting.date)],
+    ["#letter-time-am", formatTime(meeting.time)],
+    ["#letter-location-am", meeting.location || "ይገለጻል"],
+    ["#letter-date-en", formatEnglishDate(meeting.date)],
+    ["#letter-time-en", formatEnglishTime(meeting.time)],
+    ["#letter-location-en", meeting.location || "To be announced"],
+  ].forEach(([selector, value]) => {
+    const element = document.querySelector(selector);
+    if (element) element.textContent = value;
+  });
   document.querySelector("#rsvp-modal .modal-description").textContent =
     `${formatDate(meeting.date)} · ${formatTime(meeting.time)} · ${meeting.location || "ይገለጻል"}`;
 }
