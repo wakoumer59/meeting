@@ -23,7 +23,6 @@ const translations = {
     languageLabel: "ቋንቋ ይምረጡ",
     languageAmharic: "አማርኛ",
     languageEnglish: "English",
-    brandLogoAlt: "ግሬስ የአዋቂዎች ማኅበረሰብና የጤና ማዕከል",
     heroEyebrow: "💌 የግብዣ መልዕክት",
     heroWelcome: "🤝 በክብር ተጋብዘዋል!",
     artAlt: "የግሬስ አዋቂዎች ማኅበረሰብና የጤና ማዕከል ምስል፣ አዋቂዎች በአንድነት ተሰብስበው",
@@ -101,7 +100,6 @@ const translations = {
     languageLabel: "Choose language",
     languageAmharic: "Amharic",
     languageEnglish: "English",
-    brandLogoAlt: "Grace Senior Citizens Community Hub and Wellness Center",
     heroEyebrow: "Meeting invitation",
     heroWelcome: "",
     artAlt: "Grace Senior Citizens Community Hub and Wellness Center with older adults gathered together",
@@ -283,20 +281,27 @@ function formatDate(value) {
   if (!value) return t("dateAnnounced");
   const date = new Date(`${value}T12:00:00`);
   if (Number.isNaN(date.getTime())) return t("dateAnnounced");
-  const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
-  return new Intl.DateTimeFormat(currentLanguage === "am" ? "am-ET" : "en", options).format(date);
+  const locale = currentLanguage === "am" ? "am-ET" : "en";
+  const parts = new Intl.DateTimeFormat(`${locale}-u-ca-ethiopic`, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).formatToParts(date);
+  const day = parts.find((part) => part.type === "day").value;
+  const month = parts.find((part) => part.type === "month").value;
+  const year = parts.find((part) => part.type === "year").value;
+  return currentLanguage === "am"
+    ? `${day} ${month} ${year} ዓ.ም.`
+    : `${day} ${month} ${year} (Ethiopian calendar)`;
 }
 
 function formatTime(value) {
   if (!value) return t("dateAnnounced");
   const [hours, minutes] = value.split(":").map(Number);
   if (!Number.isInteger(hours) || !Number.isInteger(minutes)) return t("dateAnnounced");
-  const date = new Date();
-  date.setHours(hours, minutes, 0, 0);
-  return new Intl.DateTimeFormat(currentLanguage === "am" ? "am-ET" : "en", {
-    hour: "numeric",
-    minute: "2-digit",
-  }).format(date);
+  const ethiopianHours = (hours + 6) % 12 || 12;
+  const time = `${ethiopianHours}:${String(minutes).padStart(2, "0")}`;
+  return currentLanguage === "am" ? `${time} ከሰዓት` : `${time} (Ethiopian time)`;
 }
 
 function getLocalizedEventValue(key) {
