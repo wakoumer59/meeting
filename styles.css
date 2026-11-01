@@ -260,19 +260,67 @@ a { color: inherit; text-decoration: none; }
 .invitation-letter {
   position: relative;
   z-index: 1;
+  display: grid;
   max-width: 1180px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 24px;
   margin: 52px auto 0;
-  padding: clamp(24px, 4vw, 48px);
-  border: 1px solid rgb(255 255 255 / 78%);
-  border-radius: 22px;
+}
+.invitation-language {
+  position: relative;
+  min-width: 0;
+  min-height: 250px;
+  padding: clamp(24px, 3vw, 38px);
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid #dce8f5;
+  border-radius: 20px;
   color: #263f60;
-  background: rgb(255 255 255 / 97%);
-  box-shadow: 0 20px 55px rgb(4 24 59 / 18%);
+  background:
+    radial-gradient(ellipse at 100% 0, rgb(232 242 255 / 78%), transparent 36%),
+    #fff;
+  box-shadow: 0 12px 30px rgb(4 24 59 / 14%), 0 2px 6px rgb(4 24 59 / 5%);
+  transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease;
+}
+.invitation-language::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #edc58e, #79a8dd 55%, #93c6b3);
+  content: "";
+}
+.invitation-language:hover {
+  z-index: 1;
+  transform: translateY(-7px);
+  border-color: #b7cde6;
+  box-shadow: 0 22px 42px rgb(4 24 59 / 20%), 0 5px 12px rgb(4 24 59 / 8%);
+  animation: invitation-bounce .58s ease-out;
+}
+.invitation-card-summary { display: block; list-style: none; }
+.invitation-card-summary::-webkit-details-marker { display: none; }
+.invitation-card-summary:focus-visible { outline: 3px solid #78a8df; outline-offset: 6px; border-radius: 6px; }
+.invitation-card-summary h2 { margin: 0 0 10px; }
+.invitation-card-summary > p { min-height: 3.7em; color: #647a95; }
+.invitation-card-summary .language-label { margin-bottom: 14px !important; }
+.invitation-expand-label { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 20px; padding-top: 15px; border-top: 1px solid #e4ebf3; color: #245c9d; font-size: 12px; font-weight: 700; }
+.invitation-expand-icon { display: grid; width: 30px; height: 30px; flex: 0 0 auto; place-items: center; border-radius: 50%; color: #fff; background: var(--blue); font-size: 21px; font-weight: 400; line-height: 1; transition: transform .2s ease; }
+.invitation-language[open] .invitation-expand-icon { transform: rotate(45deg); }
+.invitation-language[open] .invitation-card-summary { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e4ebf3; }
+.invitation-content { cursor: auto; }
+@keyframes invitation-bounce {
+  0% { transform: translateY(0); }
+  38% { transform: translateY(-10px); }
+  68% { transform: translateY(-5px); }
+  100% { transform: translateY(-7px); }
+}
+.invitation-language {
   font-family: "Noto Sans Ethiopic", "Nyala", var(--sans);
   font-size: 14px;
   line-height: 2;
 }
-.invitation-language + .invitation-language { margin-top: 40px; padding-top: 34px; border-top: 1px solid #e4ebf3; }
 .language-label { display: inline-flex; margin: 0 0 10px !important; padding: 5px 11px; border-radius: 999px; color: #285d98; background: #edf4fc; font-size: 11px; font-weight: 700; line-height: 1.5; }
 .invitation-letter h2 { margin: 0 0 14px; color: #173c70; font-size: 23px; font-weight: 700; line-height: 1.5; }
 .invitation-letter h3 { margin: 24px 0 8px; color: #173c70; font-size: 15px; line-height: 1.7; }
@@ -284,13 +332,13 @@ a { color: inherit; text-decoration: none; }
 .letter-event-details > div { min-width: 0; padding: 13px 15px; border: 1px solid #e4ebf3; border-radius: 12px; background: #f7f9fc; }
 .letter-event-details dt { margin-bottom: 5px; color: #647a95; font-size: 12px; font-weight: 600; }
 .letter-event-details dd { margin: 0; color: #173c70; font-size: 13px; font-weight: 600; overflow-wrap: anywhere; }
+.invitation-closing { margin-top: 24px !important; color: #173c70; font-weight: 600; }
+.invitation-signature { margin-top: 24px !important; font-weight: 600; }
+.invitation-signature span { color: #66809d; font-family: var(--sans); font-size: 12px; }
 .english-invitation { font-family: var(--sans); line-height: 1.85; }
 .english-invitation .language-label { font-family: var(--sans); }
 .english-invitation h2, .english-invitation h3, .english-invitation .letter-event-details { font-family: var(--sans); }
 .english-invitation .invitation-signature span { font-size: 13px; }
-.invitation-closing { margin-top: 24px !important; color: #173c70; font-weight: 600; }
-.invitation-signature { margin-top: 24px !important; font-weight: 600; }
-.invitation-signature span { color: #66809d; font-family: var(--sans); font-size: 12px; }
 .hero-sparkle { position: absolute; color: rgb(237 246 255 / 48%); }
 .sparkle-one { top: 35%; left: 4.5%; font-size: 18px; }
 .sparkle-two { top: 23%; right: 4%; font-size: 21px; }
@@ -381,8 +429,8 @@ a { color: inherit; text-decoration: none; }
   .hero-art { width: min(100%, 560px); margin: 0 auto; }
   .art-caption { top: 5%; right: 5%; font-size: 9px; }
   .art-note { right: 4%; bottom: 4%; padding: 10px 12px; font-size: 11px; }
-  .invitation-letter { margin-top: 32px; padding: 25px 22px; font-size: 13px; }
-  .invitation-language + .invitation-language { margin-top: 30px; padding-top: 26px; }
+  .invitation-letter { grid-template-columns: 1fr; gap: 18px; margin-top: 32px; }
+  .invitation-language { min-height: 230px; padding: 25px 22px; font-size: 13px; }
   .letter-event-details { grid-template-columns: 1fr; gap: 8px; }
   .invitation-letter ul { padding-left: 22px; }
   .hero-sparkle { display: none; }
