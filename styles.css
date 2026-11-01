@@ -333,7 +333,8 @@ body[data-language="en"] .invitation-letter { max-width: 860px; grid-template-co
   font-size: 14px;
   line-height: 2;
 }
-.language-label { display: inline-flex; margin: 0 0 10px !important; padding: 5px 11px; border-radius: 999px; color: #285d98; background: #edf4fc; font-size: 11px; font-weight: 700; line-height: 1.5; }
+.language-label { display: inline-flex; margin: 0 0 10px !important; padding: 5px 11px; border-radius: 999px; color: #285d98; background: #edf4fc; font-size: 11px; font-weight: 700; line-height: 1.5; align-items: center; gap: 6px; }
+.lang-icon { flex: 0 0 auto; color: #164a9b; }
 .invitation-letter h2 { margin: 0 0 14px; color: #173c70; font-size: 23px; font-weight: 700; line-height: 1.5; }
 .invitation-letter h3 { margin: 24px 0 8px; color: #173c70; font-size: 15px; line-height: 1.7; }
 .invitation-letter .salutation { margin-top: 12px; }
