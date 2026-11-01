@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="am">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
-  <body>
+  <body data-language="en">
     <div class="page-shell">
       <header class="site-header">
         <a class="brand" href="#" aria-label="Grace Senior Citizens &amp; Community Hub home" data-i18n-attr="aria-label:homeLabel">
-          <span class="brand-mark" aria-hidden="true">G</span>
+          <img class="brand-mark" src="grace-mark.png" alt="" aria-hidden="true" />
           <span>Grace Senior Citizens &amp; Community Hub<span class="brand-period">.</span></span>
         </a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="የገጽ ማውጫን ክፈት" data-i18n-attr="aria-label:menuLabel">
@@ -31,126 +31,196 @@
         <nav class="site-nav" id="primary-nav" aria-label="ዋና ማውጫ" data-i18n-attr="aria-label:navLabel">
           <a href="#details" data-i18n="navMeetingDate">የመሰብሰቢያ ቀን</a>
           <a href="#contact" data-i18n="navContact">ያግኙን</a>
-          <label class="language-picker">
-            <span class="sr-only" data-i18n="languageLabel">ቋንቋ ይምረጡ</span>
-            <select id="language-select">
-              <option value="am">አማርኛ</option>
-              <option value="en">English</option>
-            </select>
-          </label>
-          <button class="nav-cta" type="button" data-open-editor>
-            <span data-i18n="navCreateInvitation">ግብዣ ያዘጋጁ</span> <span aria-hidden="true">↗</span>
-          </button>
+          <div class="header-controls">
+            <div class="language-control">
+              <button class="header-icon-button" id="language-toggle" type="button" aria-expanded="false" aria-controls="language-menu" aria-label="ቋንቋ ይምረጡ" data-i18n-attr="aria-label:languageLabel,title:languageLabel">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+              </button>
+              <div class="language-menu" id="language-menu" role="group" aria-label="ቋንቋ ይምረጡ" data-i18n-attr="aria-label:languageLabel" hidden>
+                <button type="button" data-language-option="am" data-i18n="languageAmharic" aria-pressed="false">አማርኛ</button>
+                <button type="button" data-language-option="en" data-i18n="languageEnglish" aria-pressed="true">English</button>
+              </div>
+            </div>
+          </div>
         </nav>
       </header>
 
       <main>
-        <section class="hero" aria-labelledby="event-title" lang="am">
+        <section class="hero" aria-labelledby="event-title" lang="en">
           <div class="hero-glow" aria-hidden="true"></div>
           <div class="hero-main">
             <div class="hero-content">
-              <p class="hero-org">Grace Senior Citizens &amp; Community Hub</p>
+              <img
+                class="hero-logo"
+                src="grace-wordmark.png"
+                alt="Grace Senior Citizens Community Hub and Wellness Center"
+                data-i18n-attr="alt:brandLogoAlt"
+              />
               <p class="eyebrow"><span class="eyebrow-line"></span> <span data-i18n="heroEyebrow">የግብዣ መልዕክት</span></p>
               <h1 id="event-title">የግሬስ ማዕከል የመተዋወቂያና የምክክር መርሃ ግብር</h1>
+              <p class="hero-welcome" data-i18n="heroWelcome"></p>
               <p class="hero-copy" id="event-description">
                 በክብር ተጋብዘዋል! እድሜ መጨመር የሕይወት ተፈጥሯዊ ጉዞ ነው። ነገር ግን ከዕድሜ ጋር የሚመጡ ለውጦችን እንዴት እንደምንቀበል፣ እንዴት እንደምንዘጋጅና በክብር፣ በጤናና በማኅበራዊ ትስስር የተሞላ ሕይወት እንዴት መኖር እንደምንችል ብዙ ልናስብበት የሚገባ ጉዳይ ነው።
               </p>
             </div>
 
-            <div class="hero-art">
-              <div class="art-caption"><span class="art-caption-dot"></span> <span data-i18n="artCaption">አብረን እንወያይ</span></div>
-              <img class="meeting-photo" src="meeting-people.png" alt="ስድስት ሰዎች በጠረጴዛ ዙሪያ ተሰብስበው ሲወያዩ" data-i18n-attr="alt:artAlt" />
-              <div class="art-note"><span>✦</span> <span data-i18n="artNote">አብረን ስለ እድሜ ባለጸጋነት<br />እንድገፍ እናስብ።</span></div>
-            </div>
+            <div
+              class="hero-art"
+              role="img"
+              aria-label="Grace Senior Citizens Community Hub and Wellness Center with older adults gathered together"
+              data-i18n-attr="aria-label:artAlt"
+            ></div>
           </div>
 
+          <section class="programs-section" aria-labelledby="programs-title" data-i18n-attr="aria-label:programsTitle">
+            <h2 id="programs-title" data-i18n="programsTitle">What we offer</h2>
+            <div class="programs-grid">
+              <article class="program-card">
+                <span class="program-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48"><circle cx="18" cy="15" r="6"/><circle cx="32" cy="17" r="5"/><path d="M7 36v-3a11 11 0 0 1 22 0v3H7Zm23-13a9 9 0 0 1 11 9v4H32"/></svg>
+                </span>
+                <h3 data-i18n="programDayCare">Day Care &amp; Social Activities</h3>
+              </article>
+              <article class="program-card">
+                <span class="program-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48"><path d="M24 39S7 29 7 17a9 9 0 0 1 17-4 9 9 0 0 1 17 4c0 12-17 22-17 22Z"/><path d="M10 24h9l4-7 5 14 4-7h6"/></svg>
+                </span>
+                <h3 data-i18n="programWellness">Health &amp; Wellness Support</h3>
+              </article>
+              <article class="program-card">
+                <span class="program-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48"><path d="M8 21v6m6-11v16m20-16v16m6-11v6M14 24h20M20 19v10m8-10v10"/></svg>
+                </span>
+                <h3 data-i18n="programExercise">Exercise &amp; Healthy Living</h3>
+              </article>
+              <article class="program-card">
+                <span class="program-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48"><path d="M24 7 9 14v12c0 8 6 13 15 16 9-3 15-8 15-16V14L24 7Z"/><path d="M17 25a7 7 0 1 1 14 0c0 4-3 5-3 8h-8c0-3-3-4-3-8Zm5 12h4"/></svg>
+                </span>
+                <h3 data-i18n="programWellbeing">Mental &amp; Emotional Wellbeing</h3>
+              </article>
+              <article class="program-card">
+                <span class="program-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48"><path d="M8 11h13a6 6 0 0 1 6 6v22a6 6 0 0 0-6-6H8V11Zm32 0H27v28a6 6 0 0 1 6-6h7V11Z"/></svg>
+                </span>
+                <h3 data-i18n="programLearning">Learning &amp; Life Skills</h3>
+              </article>
+              <article class="program-card">
+                <span class="program-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48"><path d="m6 22 18-15 18 15M11 20v20h26V20M19 40V28h10v12"/><circle cx="17" cy="24" r="2"/><circle cx="31" cy="24" r="2"/></svg>
+                </span>
+                <h3 data-i18n="programCommunity">Community Engagement</h3>
+              </article>
+            </div>
+          </section>
+
           <section class="invitation-letter" id="invitation-letter" aria-label="የግብዣ መልዕክት" data-i18n-attr="aria-label:invitationSectionLabel">
-            <details class="invitation-language amharic-invitation" lang="am" data-page-language="am">
+            <details class="invitation-language amharic-invitation" lang="am" data-page-language="am" hidden>
               <summary class="invitation-card-summary">
                 <span class="language-label" aria-hidden="true">
                   <svg class="lang-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12c0-2.5 1.6-4.6 4-5.4M21 12c0-2.5-1.6-4.6-4-5.4M3 12c0 2.5 1.6 4.6 4 5.4M21 12c0 2.5-1.6 4.6-4 5.4M5 12h14"/></svg>
                   *
                 </span>
-                <h2>የግብዣ መልዕክት</h2>
-                <p>ስለ ጤናማ እርጅና፣ ስለ አረጋውያን ደህንነትና ስለ ማኅበረሰብ ተሳትፎ አብረን ለመወያየት።</p>
+                <h2>📢 የምክክር ጥሪ!</h2>
+                <p>ለግሬስ Senior Citizens &amp; Community Hub የመተዋወቂያና የምክክር መርሃግብር በክብር ተጋብዘዋል፤</p>
                 <span class="invitation-expand-label">ሙሉ ግብዣውን ያንብቡ <span class="invitation-expand-icon" aria-hidden="true">+</span></span>
               </summary>
               <div class="invitation-content">
-              <h3 class="salutation">ውድ እንግዳችን፣</h3>
-              <p>
-                ይህንን ሀሳብ ይዘን Grace Senior Citizens &amp; Community Hub የተሰኘ ማዕከል ለማቋቋም በመነሳት፣
-                ስለ ጤናማ እርጅና፣ ስለ አረጋውያን ደህንነትና ስለ የማኅበረሰብ ተሳትፎ አብረን ለመወያየት ይህንን መርሃ ግብር አዘጋጅተናል።
-              </p>
-              <h3>በዝግጅቱ ላይ፦</h3>
-              <ul>
-                <li>የግሬስ ማዕከልን ራዕይ፣ ተልዕኮና የታቀዱ አገልግሎቶች እናቀርባለን።</li>
-                <li>ስለ ጤናማ እርጅና፣ የአረጋውያን አካላዊ፣ ሥነ-ልቦናዊና ማኅበራዊ ፍላጎቶች እንወያያለን።</li>
-                <li>በአረጋውያን ዙሪያ ያሉ ተግዳሮቶችንና ሊኖሩ ስለሚችሉ መፍትሔዎች ልምድና ሀሳብ እንለዋወጣለን።</li>
-                <li>ለማዕከሉ የትኞቹ አገልግሎቶች ቅድሚያ ሊሰጣቸው እንደሚገባና ከየት መጀመር እንደሚሻል በጋራ እንመክራለን።</li>
-                <li>የትብብርና የወደፊት የጋራ ሥራ ዕድሎችን እንመለከታለን።</li>
-              </ul>
-              <p>
-                ጥሪያችን ላይ በመገኘት ሀሳብዎንና ምክርዎን እንዲያጋሩን በክብር እንጋብዝዎታለን።
-              </p>
-
-              <p class="invitation-closing">
-                አብረን ስለ እድሜ ባለጸጋነት እንድገፍ እናስብ፤ ለተሻለ፣ ለጤናማና ለክብር የተሞላ የእድሜ ዘመን አብረን እንሥራ!
-              </p>
-              <p class="invitation-signature">
-                ከአክብሮት ጋር<br />
-                ጸጋ የአዋቂዎች የጤናና የማህበረሰብ ማዕከል<br />
-                <span>Grace Senior Citizens &amp; Community Hub</span>
-              </p>
+                <h2 class="amharic-letter-title">📢 የምክክር ጥሪ!</h2>
+                <p class="amharic-letter-intro">
+                  ለግሬስ <strong>Senior Citizens &amp; Community Hub</strong> የመተዋወቂያና
+                  የምክክር መርሃግብር በክብር ተጋብዘዋል፤
+                </p>
+                <h3 class="salutation">ውድ እንግዳችን፣</h3>
+                <p>
+                  እድሜ መጨመር የሕይወት ተፈጥሯዊ ጉዞ ነው። ነገር ግን ከዕድሜ ጋር የሚመጡ
+                  ለውጦችን እንዴት እንደምንቀበል፣ እንዴት እንደምንዘጋጅና በክብር፣ በጤናና
+                  በማኅበራዊ ትስስር የተሞላ ሕይወት እንዴት መኖር እንደምንችል ብዙ
+                  ልናስብበት የሚገባ ጉዳይ ነው።
+                </p>
+                <p>
+                  ይህንን ሀሳብ ይዘን <strong>Grace Senior Citizens &amp; Community Hub</strong>
+                  የተሰኘ ማዕከል ለማቋቋም በመነሳት፣ ስለ ጤናማ እርጅና፣ ስለ አረጋውያን
+                  ደህንነትና ስለ የማኅበረሰብ ተሳትፎ አብረን ለመወያየት ይህንን
+                  መርሃግብር አዘጋጅተናል።
+                </p>
+                <h3>በዝግጅቱ ላይ፦</h3>
+                <ul>
+                  <li>የግሬስ ማዕከልን ራዕይ፣ ተልዕኮና የታቀዱ አገልግሎቶችን እናቀርባለን።</li>
+                  <li>ስለ ጤናማ እድሜ ባለጸግነትና፣ የአካላዊ፣ ሥነ-ልቦናዊና ማኅበራዊ ፍላጎቶች እንወያያለን።</li>
+                  <li>በእድሜ ባለጸግነት ዙሪያ ያሉ ተግዳሮቶችንና ሊኖሩ ስለሚችሉ መፍትሔዎች ልምድና ሀሳብ እንለዋወጣለን።</li>
+                  <li>ለማዕከሉ የትኞቹ አገልግሎቶች ቅድሚያ ሊሰጣቸው እንደሚገባና ከየት መጀመር እንደሚሻል በጋራ እንመክራለን።</li>
+                  <li>የትብብርና የወደፊት የጋራ ሥራ ዕድሎችን እንመለከታለን።</li>
+                </ul>
+                <p>
+                  ጥሪያችን ላይ በመገኘት ሀሳብዎንና ምክርዎን እንዲያጋሩን በክብር
+                  እንጋብዝዎታለን።
+                </p>
+                <dl class="letter-event-details amharic-event-details">
+                  <div><dt>ቀን፦</dt><dd>6 ኖቬምበር 2026 / 27/2/2019 ዓ.ም</dd></div>
+                  <div><dt>ሰዓት፦</dt><dd>2:00 ከሰዓት</dd></div>
+                  <div><dt>ቦታ፦</dt><dd>ራማዳ አዲስ፣ ቦሌ</dd></div>
+                </dl>
+                <p class="invitation-closing">ለጤናማና ለክብር የተሞላ የእድሜ ዘመን አብረን እንሥራ፤</p>
+                <p class="invitation-signature">
+                  ከአክብሮት ጋር<br />
+                  ሳራ ግዛው (RN, BSN, MSN)<br />
+                  ቤተልሄም አለማየሁ (HO, MPH, Sociology)<br />
+                  <strong>ግሬስ የአዋቂዎች የጤናና የማህበረሰብ ማዕከል</strong><br />
+                  <span>Grace Senior Citizens &amp; Community Hub</span>
+                </p>
               </div>
             </details>
 
-            <details class="invitation-language english-invitation" lang="en" data-page-language="en" hidden>
+            <details class="invitation-language english-invitation" lang="en" data-page-language="en">
               <summary class="invitation-card-summary">
                 <span class="language-label" aria-hidden="true">
                   <svg class="lang-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12c0-2.5 1.6-4.6 4-5.4M21 12c0-2.5-1.6-4.6-4-5.4M3 12c0 2.5 1.6 4.6 4 5.4M21 12c0 2.5-1.6 4.6-4-5.4M5 12h14"/></svg>
                   *
                 </span>
-                <h2>Invitation Message</h2>
-                <p>Join us to discuss healthy aging, senior well-being, and stronger community connections.</p>
+                <h2>YOU ARE WARMLY INVITED!</h2>
+                <p>Join us for an introductory and discussion session about Grace Senior Citizens and Community Wellness Center.</p>
                 <span class="invitation-expand-label">Read the full invitation <span class="invitation-expand-icon" aria-hidden="true">+</span></span>
               </summary>
               <div class="invitation-content">
-              <h3 class="salutation">Dear Guest,</h3>
+              <h3 class="salutation"><strong>Dear Guest,</strong></h3>
               <p>
-                You are cordially invited to the introductory and consultative program of Grace
-                Senior Citizens &amp; Community Hub!
+                We are happy to invite you to an introductory and discussion session about
+                <strong>Grace Senior Citizens and Community Wellness Center!</strong>
               </p>
               <p>
-                Aging is a natural journey of life. However, how we accept the changes that come
-                with age, how we prepare for them, and how we can live a life filled with dignity,
-                health, and social connection is a matter that deserves much thought.
+                Growing older is a natural part of life, and every stage of life deserves to be
+                lived with good health, happiness, dignity, and meaningful connections. But how
+                well are we preparing for this stage of life? How can we better support our parents,
+                loved ones, and older members of our community? And what can we do together to make
+                aging a more positive experience?
               </p>
               <p>
-                With this idea in mind, taking the initiative to establish a center named Grace
-                Senior Citizens &amp; Community Hub, we have organized this program to discuss
-                healthy aging, the well-being of senior citizens, and community participation
-                together.
+                These are some of the questions that inspired us to start
+                <em>Grace Senior Citizens and Community Wellness Center.</em>
               </p>
-              <h3>At the event:</h3>
+              <p>
+                We would love to bring people together for an open conversation where we can share
+                ideas, learn from one another, and explore how we can make this vision a reality.
+              </p>
+              <h3>During our gathering, we will:</h3>
               <ul>
-                <li>We will present the vision, mission, and planned services of the Grace Center.</li>
-                <li>We will discuss healthy aging and the physical, psychological, and social needs of senior citizens.</li>
-                <li>We will exchange experiences and ideas regarding the challenges surrounding senior citizens and potential solutions.</li>
-                <li>We will consult together on which services should be prioritized for the center and where it is best to start.</li>
-                <li>We will explore opportunities for collaboration and future joint work.</li>
+                <li>Introduce the idea, vision, mission, and planned activities of Grace Center.</li>
+                <li>Talk about healthy aging and the physical, psychological, and social well-being of older adults.</li>
+                <li>Share experiences and discuss the challenges older people and their families face.</li>
+                <li>Exchange ideas about the services that matter most and where we should begin.</li>
+                <li>Explore ways we can work together, contribute, and build meaningful partnerships.</li>
               </ul>
               <p>
-                We cordially invite you to attend our event and share your thoughts and advice with us.
+                Your presence, ideas, experience, and advice would mean a lot to us.
               </p>
 
-              <p class="invitation-closing">
-                Let us think together and support graceful aging; let us work together for a better,
-                healthier, and dignified stage of life!
-              </p>
+              <p class="invitation-closing">We look forward to seeing you!</p>
               <p class="invitation-signature">
-                Respectfully,<br />
-                Grace Adult Health and Community Center<br />
-                <span>Grace Senior Citizens &amp; Community Hub</span>
+                <em>Warm regards,</em><br />
+                Sara Gizaw (RN, BSN, MSN)<br />
+                Bethlehem Alemayehu (HO, MPH, Sociology)<br />
+                <span>Grace Senior Citizens and Community Wellness Center</span>
               </p>
               </div>
             </details>
@@ -161,7 +231,7 @@
           <div class="hero-bottom-wave" aria-hidden="true"></div>
         </section>
 
-        <section class="event-section" id="details" lang="am">
+        <section class="event-section" id="details" lang="en">
           <div class="event-section-content">
             <div class="section-kicker" data-i18n="eventSectionKicker">የዝግጅቱ ዝርዝሮች</div>
             <h2 data-i18n="eventSectionTitle">ቀንና ሰዓት</h2>
@@ -195,21 +265,21 @@
                 <svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="15" rx="3"/><path d="M7.5 3.5v4m9-4v4M3.5 10h17m-12 4h.01m4 0h.01m4 0h.01m-8 3.5h.01m4 0h.01"/></svg>
               </span>
               <span class="detail-label" data-i18n="dateLabel">ቀን</span>
-              <span class="detail-value" id="event-date">ይገለጻል</span>
+              <span class="detail-value" id="event-date">November 6, 2026</span>
             </div>
             <div class="detail-item">
               <span class="detail-icon icon-clock" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg>
               </span>
               <span class="detail-label" data-i18n="timeLabel">ሰዓት</span>
-              <span class="detail-value" id="event-time">ይገለጻል</span>
+              <span class="detail-value" id="event-time">2:00 PM</span>
             </div>
             <div class="detail-item">
               <span class="detail-icon icon-pin" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M19 10.1c0 5-7 11-7 11s-7-6-7-11a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.3"/></svg>
               </span>
               <span class="detail-label" data-i18n="locationLabel">ቦታ</span>
-              <span class="detail-value" id="event-location">Bulbula</span>
+              <span class="detail-value" id="event-location">Ramada Addis, Bole</span>
             </div>
             <div class="detail-item">
               <span class="detail-icon icon-people" aria-hidden="true">
@@ -233,16 +303,38 @@
           </div>
         </section>
 
-        <section class="contact-section" id="contact" lang="am">
+        <section class="contact-section" id="contact" lang="en">
           <p class="section-kicker" data-i18n="contactKicker">ያግኙን</p>
           <h2 data-i18n="contactTitle">Grace Senior Citizens &amp; Community Hub</h2>
-          <p data-i18n="contactDescription">የመገኛ መረጃ በቅርቡ ይጨመራል።</p>
+          <p class="contact-intro" data-i18n="contactDescription">We'd be happy to hear from you.</p>
+          <div class="contact-cards">
+            <article class="contact-card">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7 3h3l2 5-2.2 1.8a15 15 0 0 0 4.4 4.4L16 12l5 2v3c0 1.1-.9 2-2 2C10.7 19 5 13.3 5 6c0-1.7.7-3 2-3Z"/></svg>
+              </span>
+              <div class="contact-card-copy">
+                <h3 data-i18n="contactBethlehem">Bethlehem</h3>
+                <a href="tel:+251912200850" aria-label="Call Bethlehem at +251 912 200 850" data-i18n-attr="aria-label:contactCallBethlehem">+251 912 200 850</a>
+              </div>
+              <span class="contact-call-label" aria-hidden="true" data-i18n="contactCall">Call</span>
+            </article>
+            <article class="contact-card">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7 3h3l2 5-2.2 1.8a15 15 0 0 0 4.4 4.4L16 12l5 2v3c0 1.1-.9 2-2 2C10.7 19 5 13.3 5 6c0-1.7.7-3 2-3Z"/></svg>
+              </span>
+              <div class="contact-card-copy">
+                <h3 data-i18n="contactSara">Sara Gezaw</h3>
+                <a href="tel:+251988902910" aria-label="Call Sara Gezaw at +251 988 902 910" data-i18n-attr="aria-label:contactCallSara">+251 988 902 910</a>
+              </div>
+              <span class="contact-call-label" aria-hidden="true" data-i18n="contactCall">Call</span>
+            </article>
+          </div>
         </section>
       </main>
 
       <footer class="site-footer">
         <a class="brand footer-brand" href="#" aria-label="Grace Senior Citizens &amp; Community Hub home" data-i18n-attr="aria-label:homeLabel">
-          <span class="brand-mark" aria-hidden="true">G</span>
+          <img class="brand-mark" src="grace-mark.png" alt="" aria-hidden="true" />
           <span>Grace Senior Citizens &amp; Community Hub<span class="brand-period">.</span></span>
         </a>
         <p data-i18n="footerNote">አብረን ስንሆን መልካም ነገሮች ይፈጠራሉ።</p>
@@ -293,16 +385,16 @@
           <div class="form-row">
             <label>
               <span data-i18n="dateLabel">ቀን</span>
-              <input name="date" type="date" value="" />
+              <input name="date" type="date" value="2026-11-06" />
             </label>
             <label>
               <span data-i18n="timeLabel">ሰዓት</span>
-              <input name="time" type="time" value="" />
+              <input name="time" type="time" value="14:00" />
             </label>
           </div>
           <label>
             <span data-i18n="locationLabel">ቦታ</span>
-            <input name="location" type="text" value="Bulbula" />
+            <input name="location" type="text" value="Ramada Addis, Bole" />
           </label>
           <div class="editor-actions">
             <button class="button button-blue" type="submit"><span data-i18n="editorSave">የግብዣ መረጃውን አዘምን</span> <span aria-hidden="true">↗</span></button>

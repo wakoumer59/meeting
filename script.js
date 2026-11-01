@@ -1,14 +1,14 @@
 const defaultEvent = {
   title: "የግሬስ ማዕከል የመተዋወቂያና የምክክር መርሃ ግብር",
   description: "በክብር ተጋብዘዋል! እድሜ መጨመር የሕይወት ተፈጥሯዊ ጉዞ ነው። ነገር ግን ከዕድሜ ጋር የሚመጡ ለውጦችን እንዴት እንደምንቀበል፣ እንዴት እንደምንዘጋጅና በክብር፣ በጤናና በማኅበራዊ ትስስር የተሞላ ሕይወት እንዴት መኖር እንደምንችል ብዙ ልናስብበት የሚገባ ጉዳይ ነው።",
-  date: "",
-  time: "",
-  location: "Bulbula",
+  date: "2026-11-06",
+  time: "14:00",
+  location: "Ramada Addis, Bole",
 };
 
 const defaultEnglishEvent = {
-  title: "Grace Hub Introduction & Discussion Program",
-  description: "You are warmly invited! Aging is a natural journey of life. Yet how we embrace the changes that come with age, prepare for them, and live with dignity, health, and social connection are important questions for all of us.",
+  title: "Grace Senior Citizens and Community Wellness Center",
+  description: "You are warmly invited to an introductory and discussion session about Grace Senior Citizens and Community Wellness Center.",
 };
 
 const translations = {
@@ -20,12 +20,20 @@ const translations = {
     navLabel: "ዋና ማውጫ",
     navMeetingDate: "የመሰብሰቢያ ቀን",
     navContact: "ያግኙን",
-    navCreateInvitation: "ግብዣ ያዘጋጁ",
     languageLabel: "ቋንቋ ይምረጡ",
-    heroEyebrow: "የግብዣ መልዕክት",
-    artCaption: "አብረን እንወያይ",
-    artAlt: "ስድስት ሰዎች በጠረጴዛ ዙሪያ ተሰብስበው ሲወያዩ",
-    artNote: "አብረን ስለ እድሜ ባለጸጋነት\nእንድገፍ እናስብ።",
+    languageAmharic: "አማርኛ",
+    languageEnglish: "English",
+    brandLogoAlt: "ግሬስ የአዋቂዎች ማኅበረሰብና የጤና ማዕከል",
+    heroEyebrow: "💌 የግብዣ መልዕክት",
+    heroWelcome: "🤝 በክብር ተጋብዘዋል!",
+    artAlt: "የግሬስ አዋቂዎች ማኅበረሰብና የጤና ማዕከል ምስል፣ አዋቂዎች በአንድነት ተሰብስበው",
+    programsTitle: "የምናቀርባቸው አገልግሎቶች",
+    programDayCare: "የቀን እንክብካቤና ማኅበራዊ እንቅስቃሴዎች",
+    programWellness: "የጤናና የደህንነት ድጋፍ",
+    programExercise: "የአካል ብቃትና ጤናማ አኗኗር",
+    programWellbeing: "ሥነ-ልቦናዊና ስሜታዊ ደህንነት",
+    programLearning: "ትምህርትና የሕይወት ክህሎቶች",
+    programCommunity: "የማኅበረሰብ ተሳትፎ",
     invitationSectionLabel: "የግብዣ መልዕክት",
     eventSectionKicker: "የዝግጅቱ ዝርዝሮች",
     eventSectionTitle: "ቀንና ሰዓት",
@@ -47,7 +55,12 @@ const translations = {
     eventNote: "ሀሳብዎንና ምክርዎን እንዲያጋሩን በክብር እንጋብዝዎታለን።",
     contactKicker: "ያግኙን",
     contactTitle: "Grace Senior Citizens & Community Hub",
-    contactDescription: "የመገኛ መረጃ በቅርቡ ይጨመራል።",
+    contactDescription: "በደስታ እናገኝዎታለን።",
+    contactBethlehem: "ቤተልሄም",
+    contactSara: "ሳራ ግዛው",
+    contactCall: "ይደውሉ",
+    contactCallBethlehem: "ለቤተልሄም በ +251 912 200 850 ይደውሉ",
+    contactCallSara: "ለሳራ ግዛው በ +251 988 902 910 ይደውሉ",
     footerNote: "አብረን ስንሆን መልካም ነገሮች ይፈጠራሉ።",
     closeDialog: "ዝጋ",
     rsvpKicker: "በክብር ቦታ አዘጋጅተናል",
@@ -85,12 +98,20 @@ const translations = {
     navLabel: "Main navigation",
     navMeetingDate: "Meeting date",
     navContact: "Contact",
-    navCreateInvitation: "Edit invitation",
     languageLabel: "Choose language",
+    languageAmharic: "Amharic",
+    languageEnglish: "English",
+    brandLogoAlt: "Grace Senior Citizens Community Hub and Wellness Center",
     heroEyebrow: "Meeting invitation",
-    artCaption: "Let's talk together",
-    artAlt: "Six people gathered around a table in conversation",
-    artNote: "Let's support\nhealthy aging together.",
+    heroWelcome: "",
+    artAlt: "Grace Senior Citizens Community Hub and Wellness Center with older adults gathered together",
+    programsTitle: "What we offer",
+    programDayCare: "Day Care & Social Activities",
+    programWellness: "Health & Wellness Support",
+    programExercise: "Exercise & Healthy Living",
+    programWellbeing: "Mental & Emotional Wellbeing",
+    programLearning: "Learning & Life Skills",
+    programCommunity: "Community Engagement",
     invitationSectionLabel: "Invitation message",
     eventSectionKicker: "MEETING DETAILS",
     eventSectionTitle: "Date & time",
@@ -112,7 +133,12 @@ const translations = {
     eventNote: "We warmly invite you to join us and share your thoughts and advice.",
     contactKicker: "CONTACT",
     contactTitle: "Grace Senior Citizens & Community Hub",
-    contactDescription: "Contact information will be added soon.",
+    contactDescription: "We'd be happy to hear from you.",
+    contactBethlehem: "Bethlehem",
+    contactSara: "Sara Gezaw",
+    contactCall: "Call",
+    contactCallBethlehem: "Call Bethlehem at +251 912 200 850",
+    contactCallSara: "Call Sara Gezaw at +251 988 902 910",
     footerNote: "Good things happen when we get together.",
     closeDialog: "Close",
     rsvpKicker: "WE SAVED YOU A SEAT",
@@ -145,6 +171,7 @@ const translations = {
 };
 
 const invitationStorageKey = "grace-invitation";
+const invitationDetailsVersionKey = "grace-invitation-details-version";
 const languageStorageKey = "grace-language";
 const eventForm = document.querySelector("#event-form");
 const editorModal = document.querySelector("#editor-modal");
@@ -153,7 +180,8 @@ const rsvpConfirmation = document.querySelector("#rsvp-confirmation");
 const editorStatus = document.querySelector("#editor-status");
 const menuToggle = document.querySelector(".menu-toggle");
 const siteNav = document.querySelector("#primary-nav");
-const languageSelect = document.querySelector("#language-select");
+const languageToggle = document.querySelector("#language-toggle");
+const languageMenu = document.querySelector("#language-menu");
 let meeting = loadEvent();
 let currentLanguage = loadLanguage();
 
@@ -167,10 +195,10 @@ function loadLanguage() {
 
   try {
     const savedLanguage = localStorage.getItem(languageStorageKey);
-    return savedLanguage === "en" ? "en" : "am";
+    return savedLanguage === "am" ? "am" : "en";
   } catch (error) {
     console.error("Could not load the saved language preference.", error);
-    return "am";
+    return "en";
   }
 }
 
@@ -182,7 +210,11 @@ function setLanguage(language) {
   document.querySelector(".hero").lang = language;
   document.querySelector("#details").lang = language;
   document.querySelector("#contact").lang = language;
-  languageSelect.value = language;
+  document.querySelectorAll("[data-language-option]").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.languageOption === language));
+  });
+  languageMenu.hidden = true;
+  languageToggle.setAttribute("aria-expanded", "false");
   document.title = t("pageTitle");
   document.querySelector('meta[name="description"]').content = t("pageDescription");
 
@@ -203,7 +235,6 @@ function setLanguage(language) {
   if (rsvpConfirmation.dataset.responseKey) {
     rsvpConfirmation.textContent = t(rsvpConfirmation.dataset.responseKey);
   }
-
   try {
     localStorage.setItem(languageStorageKey, language);
   } catch (error) {
@@ -223,13 +254,25 @@ function renderEditorStatus(key) {
 function loadEvent() {
   try {
     const saved = localStorage.getItem(invitationStorageKey);
-    if (!saved) return defaultEvent;
+    const shouldUpdateDetails = localStorage.getItem(invitationDetailsVersionKey) !== "3";
+    if (!saved) {
+      localStorage.setItem(invitationDetailsVersionKey, "3");
+      return defaultEvent;
+    }
+
     const storedEvent = JSON.parse(saved);
-    return {
+    const event = {
       ...defaultEvent,
       ...storedEvent,
-      location: storedEvent.location || defaultEvent.location,
+      date: shouldUpdateDetails ? defaultEvent.date : storedEvent.date || defaultEvent.date,
+      time: shouldUpdateDetails ? defaultEvent.time : storedEvent.time || defaultEvent.time,
+      location: shouldUpdateDetails ? defaultEvent.location : storedEvent.location || defaultEvent.location,
     };
+    if (shouldUpdateDetails) {
+      localStorage.setItem(invitationStorageKey, JSON.stringify(event));
+      localStorage.setItem(invitationDetailsVersionKey, "3");
+    }
+    return event;
   } catch (error) {
     console.error("Could not load the saved invitation.", error);
     return defaultEvent;
@@ -240,8 +283,7 @@ function formatDate(value) {
   if (!value) return t("dateAnnounced");
   const date = new Date(`${value}T12:00:00`);
   if (Number.isNaN(date.getTime())) return t("dateAnnounced");
-  const options = { weekday: "long", month: "long", day: "numeric" };
-  if (currentLanguage === "en") options.year = "numeric";
+  const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
   return new Intl.DateTimeFormat(currentLanguage === "am" ? "am-ET" : "en", options).format(date);
 }
 
@@ -252,27 +294,6 @@ function formatTime(value) {
   const date = new Date();
   date.setHours(hours, minutes, 0, 0);
   return new Intl.DateTimeFormat(currentLanguage === "am" ? "am-ET" : "en", {
-    hour: "numeric",
-    minute: "2-digit",
-  }).format(date);
-}
-
-function formatDateInLanguage(value, language) {
-  if (!value) return translations[language].dateAnnounced;
-  const date = new Date(`${value}T12:00:00`);
-  if (Number.isNaN(date.getTime())) return translations[language].dateAnnounced;
-  const options = { weekday: "long", month: "long", day: "numeric" };
-  if (language === "en") options.year = "numeric";
-  return new Intl.DateTimeFormat(language === "am" ? "am-ET" : "en", options).format(date);
-}
-
-function formatTimeInLanguage(value, language) {
-  if (!value) return translations[language].dateAnnounced;
-  const [hours, minutes] = value.split(":").map(Number);
-  if (!Number.isInteger(hours) || !Number.isInteger(minutes)) return translations[language].dateAnnounced;
-  const date = new Date();
-  date.setHours(hours, minutes, 0, 0);
-  return new Intl.DateTimeFormat(language === "am" ? "am-ET" : "en", {
     hour: "numeric",
     minute: "2-digit",
   }).format(date);
@@ -293,24 +314,19 @@ function renderEvent() {
   const titleBreak = Math.max(1, Math.ceil(titleParts.length / 2));
   const firstLine = titleParts.slice(0, titleBreak).join(" ");
   const secondLine = titleParts.slice(titleBreak).join(" ");
+  const amharicTitlePrefix = currentLanguage === "am" ? '<span aria-hidden="true">📢 </span>' : "";
+  const description = getLocalizedEventValue("description").trim();
+  const amharicWelcomePrefix = "በክብር ተጋብዘዋል!";
+  const heroDescription = currentLanguage === "am"
+    ? `🌿 ${description.startsWith(amharicWelcomePrefix) ? description.slice(amharicWelcomePrefix.length).trim() : description}`
+    : description;
 
   document.querySelector("#event-title").innerHTML =
-    `<span class="hero-title-main">${escapeHtml(firstLine)}</span>${secondLine ? `<em class="hero-title-accent">${escapeHtml(secondLine)}</em>` : ""}`;
-  document.querySelector("#event-description").textContent = getLocalizedEventValue("description");
+    `<span class="hero-title-main">${amharicTitlePrefix}${escapeHtml(firstLine)}</span>${secondLine ? `<em class="hero-title-accent">${escapeHtml(secondLine)}</em>` : ""}`;
+  document.querySelector("#event-description").textContent = heroDescription;
   document.querySelector("#event-date").textContent = formatDate(meeting.date);
   document.querySelector("#event-time").textContent = formatTime(meeting.time);
   document.querySelector("#event-location").textContent = meeting.location || t("locationAnnounced");
-  [
-    ["#letter-date-am", formatDateInLanguage(meeting.date, "am")],
-    ["#letter-time-am", formatTimeInLanguage(meeting.time, "am")],
-    ["#letter-location-am", meeting.location || translations.am.locationAnnounced],
-    ["#letter-date-en", formatDateInLanguage(meeting.date, "en")],
-    ["#letter-time-en", formatTimeInLanguage(meeting.time, "en")],
-    ["#letter-location-en", meeting.location || translations.en.locationAnnounced],
-  ].forEach(([selector, value]) => {
-    const element = document.querySelector(selector);
-    if (element) element.textContent = value;
-  });
   document.querySelector("#rsvp-modal .modal-description").textContent =
     `${formatDate(meeting.date)} · ${formatTime(meeting.time)} · ${meeting.location || t("locationAnnounced")}`;
   updateCountdown();
@@ -508,8 +524,29 @@ siteNav.querySelectorAll("a").forEach((link) => {
   });
 });
 
-languageSelect.addEventListener("change", () => {
-  setLanguage(languageSelect.value);
+languageToggle.addEventListener("click", () => {
+  const expanded = languageToggle.getAttribute("aria-expanded") === "true";
+  languageToggle.setAttribute("aria-expanded", String(!expanded));
+  languageMenu.hidden = expanded;
+});
+
+languageMenu.querySelectorAll("[data-language-option]").forEach((button) => {
+  button.addEventListener("click", () => setLanguage(button.dataset.languageOption));
+});
+
+document.addEventListener("click", (event) => {
+  if (!event.target.closest(".language-control")) {
+    languageMenu.hidden = true;
+    languageToggle.setAttribute("aria-expanded", "false");
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !languageMenu.hidden) {
+    languageMenu.hidden = true;
+    languageToggle.setAttribute("aria-expanded", "false");
+    languageToggle.focus();
+  }
 });
 
 function applyQueryEvent() {
