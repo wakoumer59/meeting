@@ -7,15 +7,15 @@ const defaultEvent = {
 };
 
 const defaultEnglishEvent = {
-  title: "Grace Senior Citizens & Community Wellness Center",
-  description: "You are warmly invited to an introductory and discussion session about Grace Senior Citizens & Community Wellness Center.",
+  title: "Grace Senior Citizens Community Hub and Wellness Center",
+  description: "You are warmly invited to an introductory and discussion session about Grace Senior Citizens Community Hub and Wellness Center.",
 };
 
 const translations = {
   am: {
-    pageTitle: "Grace Senior Citizens & Community Wellness Center — የግብዣ መልዕክት",
-    pageDescription: "Grace Senior Citizens & Community Wellness Center — የመተዋወቂያና የምክክር መርሃ ግብር የግብዣ መልዕክት።",
-    homeLabel: "Grace Senior Citizens & Community Wellness Center ዋና ገጽ",
+    pageTitle: "Grace Senior Citizens Community Hub and Wellness Center — የግብዣ መልዕክት",
+    pageDescription: "Grace Senior Citizens Community Hub and Wellness Center — የመተዋወቂያና የምክክር መርሃ ግብር የግብዣ መልዕክት።",
+    homeLabel: "Grace Senior Citizens Community Hub and Wellness Center ዋና ገጽ",
     menuLabel: "የገጽ ማውጫን ክፈት",
     navLabel: "ዋና ማውጫ",
     navMeetingDate: "የመሰብሰቢያ ቀን",
@@ -53,7 +53,7 @@ const translations = {
     calendarButton: "ወደ ቀን መቁጠሪያ ጨምር",
     eventNote: "ሀሳብዎንና ምክርዎን እንዲያጋሩን በክብር እንጋብዝዎታለን።",
     contactKicker: "ያግኙን",
-    contactTitle: "Grace Senior Citizens & Community Wellness Center",
+    contactTitle: "Grace Senior Citizens Community Hub and Wellness Center",
     contactDescription: "በደስታ እናገኝዎታለን።",
     contactBethlehem: "ቤተልሄም",
     contactSara: "ሳራ ግዛው",
@@ -69,6 +69,7 @@ const translations = {
     rsvpResponses: "ምላሽ",
     rsvpLocalOnly: "ምላሾች በዚህ አሳሽ ብቻ ይቆጠራሉ።",
     rsvpStorageError: "ምላሾችን ማስቀመጥ ወይም ማሳየት አልተቻለም።",
+    rsvpAlreadyResponded: "አንድ ጊዜ ምላሽ ሰጥተዋል፤ ምላሽዎ ተመዝግቧል።",
     rsvpAttend: "እመጣለሁ",
     rsvpMaybe: "አረጋግጬ እመልሳለሁ",
     rsvpDecline: "መገኘት አልችልም",
@@ -93,9 +94,9 @@ const translations = {
     locationAnnounced: "ይገለጻል",
   },
   en: {
-    pageTitle: "Grace Senior Citizens & Community Wellness Center — Meeting Invitation",
-    pageDescription: "Join Grace Senior Citizens & Community Wellness Center for an introductory and consultative program.",
-    homeLabel: "Grace Senior Citizens & Community Wellness Center home",
+    pageTitle: "Grace Senior Citizens Community Hub and Wellness Center — Meeting Invitation",
+    pageDescription: "Join Grace Senior Citizens Community Hub and Wellness Center for an introductory and consultative program.",
+    homeLabel: "Grace Senior Citizens Community Hub and Wellness Center home",
     menuLabel: "Open page navigation",
     navLabel: "Main navigation",
     navMeetingDate: "Meeting date",
@@ -105,7 +106,7 @@ const translations = {
     languageEnglish: "English",
     heroEyebrow: "Meeting invitation",
     heroWelcome: "",
-    artAlt: "Grace Senior Citizens & Community Wellness Center with older adults gathered together",
+    artAlt: "Grace Senior Citizens Community Hub and Wellness Center with older adults gathered together",
     programsTitle: "What we offer",
     programDayCare: "Day Care & Social Activities",
     programWellness: "Health & Wellness Support",
@@ -133,7 +134,7 @@ const translations = {
     calendarButton: "Add to calendar",
     eventNote: "We warmly invite you to join us and share your thoughts and advice.",
     contactKicker: "CONTACT",
-    contactTitle: "Grace Senior Citizens & Community Wellness Center",
+    contactTitle: "Grace Senior Citizens Community Hub and Wellness Center",
     contactDescription: "We'd be happy to hear from you.",
     contactBethlehem: "Bethlehem",
     contactSara: "Sara Gezaw",
@@ -149,6 +150,7 @@ const translations = {
     rsvpResponses: "responses",
     rsvpLocalOnly: "Responses are counted on this device only.",
     rsvpStorageError: "Responses could not be saved or loaded.",
+    rsvpAlreadyResponded: "You already responded. Your choice has been recorded.",
     rsvpAttend: "Count me in",
     rsvpMaybe: "Maybe",
     rsvpDecline: "Can't make it",
@@ -191,37 +193,49 @@ let meeting = loadEvent();
 let currentLanguage = loadLanguage();
 const rsvpCountsStorageKey = "gather-rsvp-counts";
 let rsvpCountsError = false;
-let rsvpCounts = loadRsvpCounts();
+let rsvpState = loadRsvpState();
 
 function t(key) {
   return translations[currentLanguage][key];
 }
 
-function loadRsvpCounts() {
+function loadRsvpState() {
   try {
-    const savedCounts = localStorage.getItem(rsvpCountsStorageKey);
-    if (!savedCounts) return { attending: 0, maybe: 0, declining: 0 };
+    const savedState = localStorage.getItem(rsvpCountsStorageKey);
+    if (!savedState) {
+      return {
+        counts: { attending: 0, maybe: 0, declining: 0 },
+        response: null,
+      };
+    }
 
-    const counts = JSON.parse(savedCounts);
-    const isValid = counts
+    const saved = JSON.parse(savedState);
+    const counts = saved.counts || saved;
+    const isValidCounts = counts
       && ["attending", "maybe", "declining"].every(
         (key) => Number.isSafeInteger(counts[key]) && counts[key] >= 0,
       );
-    if (!isValid) throw new Error("Saved RSVP counts have an invalid format.");
-    return counts;
+    const response = saved.response ?? null;
+    if (!isValidCounts || (response !== null && !["attending", "maybe", "declining"].includes(response))) {
+      throw new Error("Saved RSVP state has an invalid format.");
+    }
+    return { counts, response };
   } catch (error) {
     rsvpCountsError = true;
-    console.error("Could not load RSVP counts.", error);
+    console.error("Could not load RSVP state.", error);
     return null;
   }
 }
 
 function renderRsvpCounts() {
   document.querySelectorAll("[data-rsvp-count]").forEach((element) => {
-    const count = rsvpCounts?.[element.dataset.rsvpCount];
+    const count = rsvpState?.counts[element.dataset.rsvpCount];
     element.textContent = rsvpCountsError
       ? "—"
       : `${new Intl.NumberFormat(currentLanguage === "am" ? "am-ET" : "en").format(count)} ${t("rsvpResponses")}`;
+  });
+  document.querySelectorAll("[data-rsvp]").forEach((button) => {
+    button.setAttribute("aria-pressed", String(rsvpState?.response === button.dataset.rsvp));
   });
   rsvpStorageStatus.textContent = rsvpCountsError ? t("rsvpStorageError") : "";
 }
@@ -351,8 +365,8 @@ function getLocalizedEventValue(key) {
     return currentLanguage === "en" ? englishDefault : defaultValue;
   }
   return meeting[key].replace(
-    /Grace Senior Citizens\s+(?:&|and)\s+Community\s+(?:Hub|Wellness Center)/gi,
-    "Grace Senior Citizens & Community Wellness Center",
+    /Grace Senior Citizens\s+(?:(?:&|and)\s+)?Community\s+(?:Hub(?:\s+and\s+Wellness Center)?|Wellness Center)/gi,
+    "Grace Senior Citizens Community Hub and Wellness Center",
   );
 }
 
@@ -453,7 +467,7 @@ document.querySelectorAll("[data-open-editor]").forEach((button) => {
 document.querySelectorAll("[data-open-rsvp]").forEach((button) => {
   button.addEventListener("click", () => {
     delete rsvpConfirmation.dataset.responseKey;
-    rsvpConfirmation.textContent = "";
+    rsvpConfirmation.textContent = rsvpState?.response ? t("rsvpAlreadyResponded") : "";
     openDialog(rsvpModal);
   });
 });
@@ -466,28 +480,43 @@ document.querySelectorAll(".modal").forEach((dialog) => {
 
 document.querySelectorAll("[data-rsvp]").forEach((button) => {
   button.addEventListener("click", () => {
-    if (!rsvpCounts || rsvpCountsError) {
+    if (!rsvpState || rsvpCountsError) {
       rsvpStorageStatus.textContent = t("rsvpStorageError");
       return;
     }
 
     const response = button.dataset.rsvp;
-    if (!Object.hasOwn(rsvpCounts, response)) return;
-    const updatedCounts = { ...rsvpCounts, [response]: rsvpCounts[response] + 1 };
+    if (!Object.hasOwn(rsvpState.counts, response)) return;
+    if (rsvpState.response) {
+      rsvpConfirmation.textContent = t("rsvpAlreadyResponded");
+      return;
+    }
+
+    const updatedState = {
+      counts: { ...rsvpState.counts, [response]: rsvpState.counts[response] + 1 },
+      response,
+    };
     try {
-      localStorage.setItem(rsvpCountsStorageKey, JSON.stringify(updatedCounts));
+      localStorage.setItem(rsvpCountsStorageKey, JSON.stringify(updatedState));
     } catch (error) {
-      console.error("Could not save RSVP counts.", error);
+      console.error("Could not save RSVP state.", error);
       rsvpStorageStatus.textContent = t("rsvpStorageError");
       return;
     }
 
-    rsvpCounts = updatedCounts;
+    rsvpState = updatedState;
     renderRsvpCounts();
-    const responseKey = `rsvpResponse${button.dataset.rsvp[0].toUpperCase()}${button.dataset.rsvp.slice(1)}`;
+    const responseKey = `rsvpResponse${response[0].toUpperCase()}${response.slice(1)}`;
     rsvpConfirmation.dataset.responseKey = responseKey;
     rsvpConfirmation.textContent = t(responseKey);
   });
+});
+
+window.addEventListener("storage", (event) => {
+  if (event.key !== rsvpCountsStorageKey) return;
+  rsvpState = loadRsvpState();
+  rsvpCountsError = !rsvpState;
+  renderRsvpCounts();
 });
 
 eventForm.addEventListener("submit", (event) => {
@@ -546,7 +575,7 @@ document.querySelector("#calendar-button").addEventListener("click", () => {
   const ics = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Grace Senior Citizens & Community Wellness Center//Invitation//AM",
+    "PRODID:-//Grace Senior Citizens Community Hub and Wellness Center//Invitation//AM",
     "BEGIN:VEVENT",
     `DTSTAMP:${toCalendarDate(new Date())}`,
     `DTSTART:${toCalendarDate(start)}`,
