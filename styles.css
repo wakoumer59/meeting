@@ -106,15 +106,23 @@ a { color: inherit; text-decoration: none; }
 
 .hero {
   position: relative;
-  display: flex;
-  min-height: 780px;
-  align-items: center;
-  padding: 160px max(7.5vw, calc((100vw - 1180px) / 2)) 142px;
+  padding: 155px max(7.5vw, calc((100vw - 1180px) / 2)) 110px;
   overflow: hidden;
   color: white;
   background:
     radial-gradient(ellipse at 75% 48%, rgb(44 109 197 / 44%), transparent 37%),
     linear-gradient(118deg, #123b83 0%, #154994 52%, #1854a0 100%);
+}
+
+.hero-main {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  max-width: 1180px;
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 58px);
+  margin: 0 auto;
 }
 
 .hero::before, .hero::after {
@@ -145,8 +153,8 @@ a { color: inherit; text-decoration: none; }
 .hero-content {
   position: relative;
   z-index: 2;
-  width: min(48%, 510px);
-  flex: 0 0 auto;
+  width: 100%;
+  max-width: 540px;
   padding-top: 21px;
 }
 
@@ -159,15 +167,17 @@ a { color: inherit; text-decoration: none; }
 }
 
 .eyebrow { display: flex; align-items: center; gap: 11px; color: #d3e6ff; }
+.hero .eyebrow { font-family: "Noto Sans Ethiopic", "Nyala", var(--sans); font-size: 11px; letter-spacing: 0; text-transform: none; }
+.hero-org { margin: 0; color: #d3e6ff; font-size: 12px; font-weight: 600; letter-spacing: .2px; }
 .eyebrow-line { display: block; width: 27px; height: 1px; background: #e3b978; }
 
 .hero h1 {
   margin: 22px 0 15px;
-  font-family: var(--serif);
-  font-size: clamp(55px, 6.25vw, 83px);
+  font-family: "Noto Sans Ethiopic", "Nyala", var(--sans);
+  font-size: clamp(35px, 3.8vw, 52px);
   font-weight: 600;
-  letter-spacing: -3.2px;
-  line-height: .99;
+  letter-spacing: 0;
+  line-height: 1.38;
 }
 
 .hero h1 em, .why-section h2 em, .steps-heading h2 em, .modal h2 em {
@@ -176,19 +186,20 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero-copy {
-  max-width: 425px;
+  max-width: 540px;
   margin: 22px 0 26px;
   color: #d8e6f9;
-  font-size: 14px;
-  line-height: 1.8;
+  font-family: "Noto Sans Ethiopic", "Nyala", var(--sans);
+  font-size: 13px;
+  line-height: 2;
 }
 
 .event-details {
   display: grid;
-  width: min(100%, 465px);
-  grid-template-columns: repeat(4, 1fr);
-  gap: 9px;
-  margin-top: 30px;
+  width: min(100%, 510px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 14px;
+  margin-top: 25px;
 }
 
 .detail-item {
@@ -216,8 +227,8 @@ a { color: inherit; text-decoration: none; }
 .icon-clock { color: #9de0c7; }
 .icon-pin { color: #ef9c88; }
 .icon-people { color: #bbadff; }
-.detail-label { color: #a9c5e8; font-size: 9px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
-.detail-value { overflow: hidden; max-width: 100%; color: #fff; font-size: 11px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+.detail-label { color: #a9c5e8; font-size: 10px; font-weight: 600; }
+.detail-value { overflow: hidden; max-width: 100%; color: #fff; font-family: "Noto Sans Ethiopic", "Nyala", var(--sans); font-size: 11px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
 
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
 .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 14px; padding: 0 19px; border: 1px solid transparent; border-radius: 10px; font-size: 12px; font-weight: 600; transition: transform .2s ease, background .2s ease, box-shadow .2s ease; }
@@ -232,13 +243,12 @@ a { color: inherit; text-decoration: none; }
 .rsvp-note span { margin-right: 5px; color: #f1c781; }
 
 .hero-art {
-  position: absolute;
-  top: 111px;
-  right: max(2.5vw, calc((100vw - 1330px) / 2));
+  position: relative;
   z-index: 1;
-  width: min(56vw, 735px);
+  width: 100%;
   height: auto;
   aspect-ratio: 1024 / 765;
+  align-self: center;
 }
 
 .hero-art { overflow: hidden; border: 1px solid rgb(255 255 255 / 62%); border-radius: 24px; background: #fff; box-shadow: 0 22px 54px rgb(3 23 60 / 20%); }
@@ -247,10 +257,33 @@ a { color: inherit; text-decoration: none; }
 .art-caption-dot { width: 6px; height: 6px; border-radius: 50%; background: #f3ca88; box-shadow: 0 0 12px #f3ca88; }
 .art-note { position: absolute; right: 20px; bottom: 20px; padding: 14px 18px; border: 1px solid rgb(255 255 255 / 80%); border-radius: 12px; color: #234a77; background: rgb(255 255 255 / 92%); box-shadow: 0 6px 20px rgb(21 55 94 / 14%); font-family: var(--serif); font-size: 13px; font-style: italic; line-height: 1.6; backdrop-filter: blur(8px); }
 .art-note span { margin-right: 5px; color: #f2c886; font-style: normal; }
+.invitation-letter {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 52px auto 0;
+  padding: clamp(24px, 4vw, 48px);
+  border: 1px solid rgb(255 255 255 / 78%);
+  border-radius: 22px;
+  color: #263f60;
+  background: rgb(255 255 255 / 97%);
+  box-shadow: 0 20px 55px rgb(4 24 59 / 18%);
+  font-family: "Noto Sans Ethiopic", "Nyala", var(--sans);
+  font-size: 14px;
+  line-height: 2;
+}
+.invitation-letter h2 { margin: 0 0 14px; color: #173c70; font-size: 20px; font-weight: 700; }
+.invitation-letter h3 { margin: 24px 0 8px; color: #173c70; font-size: 15px; }
+.invitation-letter p { margin: 12px 0; }
+.invitation-letter ul { display: grid; gap: 10px; margin: 10px 0 20px; padding-left: 26px; }
+.invitation-letter li { padding-left: 4px; }
+.invitation-closing { margin-top: 24px !important; color: #173c70; font-weight: 600; }
+.invitation-signature { margin-top: 24px !important; font-weight: 600; }
+.invitation-signature span { color: #66809d; font-family: var(--sans); font-size: 12px; }
 .hero-sparkle { position: absolute; color: rgb(237 246 255 / 48%); }
 .sparkle-one { top: 35%; left: 4.5%; font-size: 18px; }
 .sparkle-two { top: 23%; right: 4%; font-size: 21px; }
-.hero-bottom-wave { position: absolute; z-index: 0; right: -4%; bottom: -174px; left: -4%; height: 250px; transform: rotate(-2.2deg); border-radius: 50% 50% 0 0 / 28% 28% 0 0; background: var(--paper); }
+.hero-bottom-wave { position: absolute; z-index: 0; right: 0; bottom: -174px; left: 0; height: 250px; border-radius: 50% 50% 0 0 / 28% 28% 0 0; background: var(--paper); }
 
 .why-section { position: relative; z-index: 1; padding: 66px 24px 90px; text-align: center; background: var(--paper); }
 .section-kicker { color: #8997aa; font-size: 9px; letter-spacing: 1.9px; }
@@ -307,15 +340,13 @@ a { color: inherit; text-decoration: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
 
 @media (min-width: 1500px) {
-  .hero { min-height: 820px; }
-  .hero-art { top: 124px; right: max(5vw, calc((100vw - 1410px) / 2)); width: min(55vw, 800px); height: 630px; }
+  .hero-main, .invitation-letter { max-width: 1280px; }
 }
 
 @media (max-width: 1050px) {
-  .hero { min-height: 735px; padding-right: 5vw; padding-left: 7vw; }
-  .hero-content { width: 51%; }
-  .hero-art { top: 137px; right: -5vw; width: 56vw; height: auto; aspect-ratio: 1024 / 765; }
-  .hero h1 { font-size: clamp(52px, 6vw, 68px); }
+  .hero { padding-right: 5vw; padding-left: 5vw; }
+  .hero-main { gap: 28px; }
+  .hero h1 { font-size: clamp(34px, 4.5vw, 46px); }
   .art-note { right: 4%; bottom: 18px; }
 }
 
@@ -329,15 +360,18 @@ a { color: inherit; text-decoration: none; }
   .site-nav.is-open { display: flex; flex-direction: column; }
   .site-nav a { padding: 13px 12px; }
   .nav-cta { justify-content: space-between; margin-top: 5px; }
-  .hero { display: block; min-height: 0; padding: 125px 25px 88px; }
-  .hero-content { width: 100%; max-width: 520px; margin: 0 auto; padding-top: 0; }
-  .hero h1 { margin-top: 19px; font-size: clamp(52px, 12vw, 74px); letter-spacing: -2.6px; }
-  .hero-copy { max-width: 410px; margin-top: 17px; font-size: 13px; }
-  .event-details { max-width: 440px; margin-top: 25px; }
+  .hero { padding: 112px 25px 78px; }
+  .hero-main { grid-template-columns: 1fr; gap: 28px; }
+  .hero-content { width: 100%; max-width: 560px; margin: 0 auto; padding-top: 0; }
+  .hero h1 { margin-top: 19px; font-size: clamp(34px, 8vw, 48px); }
+  .hero-copy { max-width: 540px; margin-top: 17px; font-size: 13px; }
+  .event-details { max-width: 540px; margin-top: 25px; }
   .detail-value { font-size: 10px; }
-  .hero-art { position: relative; top: auto; right: auto; width: min(100%, 560px); height: auto; aspect-ratio: 680 / 510; margin: 5px auto -43px; }
+  .hero-art { width: min(100%, 560px); margin: 0 auto; }
   .art-caption { top: 5%; right: 5%; font-size: 9px; }
   .art-note { right: 4%; bottom: 4%; padding: 10px 12px; font-size: 11px; }
+  .invitation-letter { margin-top: 32px; padding: 25px 22px; font-size: 13px; }
+  .invitation-letter ul { padding-left: 22px; }
   .hero-sparkle { display: none; }
   .hero-bottom-wave { bottom: -205px; height: 260px; }
   .why-section { padding: 49px 23px 69px; }
@@ -355,7 +389,7 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 420px) {
   .hero { padding-right: 19px; padding-left: 19px; }
-  .hero h1 { font-size: 51px; }
+  .hero h1 { font-size: 33px; }
   .event-details { gap: 8px 4px; }
   .detail-icon { width: 35px; height: 35px; border-radius: 11px; }
   .detail-icon svg { width: 18px; height: 18px; }

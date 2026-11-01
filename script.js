@@ -1,11 +1,12 @@
 const defaultEvent = {
-  title: "Good ideas start together.",
-  description: "Join us for a thoughtful conversation, fresh perspectives, and the next big idea.",
-  date: "2026-11-05",
-  time: "10:30",
-  location: "The Blue Room",
+  title: "የግሬስ ማዕከል የመተዋወቂያና የምክክር መርሃ ግብር",
+  description: "በክብር ተጋብዘዋል! እድሜ መጨመር የሕይወት ተፈጥሯዊ ጉዞ ነው። ነገር ግን ከዕድሜ ጋር የሚመጡ ለውጦችን እንዴት እንደምንቀበል፣ እንዴት እንደምንዘጋጅና በክብር፣ በጤናና በማኅበራዊ ትስስር የተሞላ ሕይወት እንዴት መኖር እንደምንችል ብዙ ልናስብበት የሚገባ ጉዳይ ነው።",
+  date: "",
+  time: "",
+  location: "",
 };
 
+const invitationStorageKey = "grace-invitation";
 const eventForm = document.querySelector("#event-form");
 const editorModal = document.querySelector("#editor-modal");
 const rsvpModal = document.querySelector("#rsvp-modal");
@@ -17,7 +18,7 @@ let meeting = loadEvent();
 
 function loadEvent() {
   try {
-    const saved = localStorage.getItem("gather-invitation");
+    const saved = localStorage.getItem(invitationStorageKey);
     return saved ? { ...defaultEvent, ...JSON.parse(saved) } : defaultEvent;
   } catch (error) {
     console.error("Could not load the saved invitation.", error);
@@ -26,19 +27,19 @@ function loadEvent() {
 }
 
 function formatDate(value) {
-  if (!value) return "Date to be announced";
+  if (!value) return "ይገለጻል";
   const date = new Date(`${value}T12:00:00`);
-  if (Number.isNaN(date.getTime())) return "Date to be announced";
-  return new Intl.DateTimeFormat("en", { weekday: "long", month: "long", day: "numeric" }).format(date);
+  if (Number.isNaN(date.getTime())) return "ይገለጻል";
+  return new Intl.DateTimeFormat("am-ET", { weekday: "long", month: "long", day: "numeric" }).format(date);
 }
 
 function formatTime(value) {
-  if (!value) return "Time to be announced";
+  if (!value) return "ይገለጻል";
   const [hours, minutes] = value.split(":").map(Number);
-  if (!Number.isInteger(hours) || !Number.isInteger(minutes)) return "Time to be announced";
+  if (!Number.isInteger(hours) || !Number.isInteger(minutes)) return "ይገለጻል";
   const date = new Date();
   date.setHours(hours, minutes, 0, 0);
-  return new Intl.DateTimeFormat("en", { hour: "numeric", minute: "2-digit" }).format(date);
+  return new Intl.DateTimeFormat("am-ET", { hour: "numeric", minute: "2-digit" }).format(date);
 }
 
 function renderEvent() {
@@ -53,9 +54,9 @@ function renderEvent() {
   document.querySelector("#event-description").textContent = meeting.description;
   document.querySelector("#event-date").textContent = formatDate(meeting.date);
   document.querySelector("#event-time").textContent = formatTime(meeting.time);
-  document.querySelector("#event-location").textContent = meeting.location;
+  document.querySelector("#event-location").textContent = meeting.location || "ይገለጻል";
   document.querySelector("#rsvp-modal .modal-description").textContent =
-    `${formatDate(meeting.date)} at ${formatTime(meeting.time)} · ${meeting.location}`;
+    `${formatDate(meeting.date)} · ${formatTime(meeting.time)} · ${meeting.location || "ይገለጻል"}`;
 }
 
 function escapeHtml(value) {
@@ -107,7 +108,7 @@ document.querySelectorAll("[data-rsvp]").forEach((button) => {
     } catch (error) {
       console.error("Could not save your RSVP.", error);
     }
-    rsvpConfirmation.textContent = `${response}. Thanks for letting us know!`;
+    rsvpConfirmation.textContent = response;
   });
 });
 
@@ -120,16 +121,16 @@ eventForm.addEventListener("submit", (event) => {
   nextEvent.location = nextEvent.location.trim();
 
   try {
-    localStorage.setItem("gather-invitation", JSON.stringify(nextEvent));
+    localStorage.setItem(invitationStorageKey, JSON.stringify(nextEvent));
   } catch (error) {
-    editorStatus.textContent = "Your browser couldn't save these changes. Please check your storage settings.";
+    editorStatus.textContent = "ለውጦቹን ማስቀመጥ አልተቻለም። እባክዎ የአሳሽዎን የማከማቻ ቅንብሮች ይመልከቱ።";
     console.error("Could not save the invitation.", error);
     return;
   }
 
   meeting = nextEvent;
   renderEvent();
-  editorStatus.textContent = "Your invitation is updated and saved in this browser.";
+  editorStatus.textContent = "የግብዣ መረጃው ተዘምኖ በዚህ አሳሽ ውስጥ ተቀምጧል።";
 });
 
 document.querySelector("#share-button").addEventListener("click", async (event) => {
@@ -143,18 +144,22 @@ document.querySelector("#share-button").addEventListener("click", async (event) 
 
   try {
     await navigator.clipboard.writeText(shareUrl.toString());
-    editorStatus.textContent = "Invitation link copied. Your changes are saved in this browser only.";
+    editorStatus.textContent = "የግብዣ ሊንኩ ተቀድቷል። ለውጦቹ በዚህ አሳሽ ውስጥ ብቻ ይቀመጣሉ።";
   } catch (error) {
-    editorStatus.textContent = "Couldn't access the clipboard. Copy the invitation URL from your browser address bar.";
+    editorStatus.textContent = "የግብዣ ሊንኩን መቅዳት አልተቻለም። ከአሳሽዎ የአድራሻ መስመር ይቅዱት።";
     console.error("Could not copy the invitation link.", error);
   }
   button.blur();
 });
 
 document.querySelector("#calendar-button").addEventListener("click", () => {
-  const start = new Date(`${meeting.date}T${meeting.time || "10:30"}:00`);
+  if (!meeting.date || !meeting.time) {
+    window.alert("እባክዎ መጀመሪያ ቀንና ሰዓት ያስገቡ።");
+    return;
+  }
+  const start = new Date(`${meeting.date}T${meeting.time}:00`);
   if (Number.isNaN(start.getTime())) {
-    window.alert("Please set a valid date and time in the invitation first.");
+    window.alert("እባክዎ መጀመሪያ ትክክለኛ ቀንና ሰዓት ያስገቡ።");
     return;
   }
   const end = new Date(start.getTime() + 60 * 60 * 1000);
@@ -162,7 +167,7 @@ document.querySelector("#calendar-button").addEventListener("click", () => {
   const ics = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Gather//Meeting Invitation//EN",
+    "PRODID:-//Grace Senior Citizens & Community Hub//Invitation//AM",
     "BEGIN:VEVENT",
     `DTSTAMP:${toCalendarDate(new Date())}`,
     `DTSTART:${toCalendarDate(start)}`,
