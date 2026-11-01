@@ -237,13 +237,15 @@ a { color: inherit; text-decoration: none; }
   right: max(2.5vw, calc((100vw - 1330px) / 2));
   z-index: 1;
   width: min(56vw, 735px);
-  height: 585px;
+  height: auto;
+  aspect-ratio: 1024 / 765;
 }
 
-.meeting-illustration { position: absolute; inset: 5px 0 0; width: 100%; height: 100%; overflow: visible; }
-.art-caption { position: absolute; top: 36px; right: 70px; z-index: 1; display: flex; align-items: center; gap: 8px; color: #d9eaff; font-size: 10px; letter-spacing: .5px; }
+.hero-art { overflow: hidden; border: 1px solid rgb(255 255 255 / 62%); border-radius: 24px; background: #fff; box-shadow: 0 22px 54px rgb(3 23 60 / 20%); }
+.meeting-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.art-caption { position: absolute; top: 24px; right: 24px; z-index: 1; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid rgb(255 255 255 / 70%); border-radius: 999px; color: #234a77; background: rgb(255 255 255 / 92%); box-shadow: 0 5px 18px rgb(21 55 94 / 12%); font-size: 10px; letter-spacing: .5px; }
 .art-caption-dot { width: 6px; height: 6px; border-radius: 50%; background: #f3ca88; box-shadow: 0 0 12px #f3ca88; }
-.art-note { position: absolute; right: -4px; bottom: 59px; padding: 14px 18px; border: 1px solid rgb(255 255 255 / 31%); border-radius: 12px; color: #e8f2ff; background: rgb(255 255 255 / 10%); font-family: var(--serif); font-size: 13px; font-style: italic; line-height: 1.6; backdrop-filter: blur(8px); }
+.art-note { position: absolute; right: 20px; bottom: 20px; padding: 14px 18px; border: 1px solid rgb(255 255 255 / 80%); border-radius: 12px; color: #234a77; background: rgb(255 255 255 / 92%); box-shadow: 0 6px 20px rgb(21 55 94 / 14%); font-family: var(--serif); font-size: 13px; font-style: italic; line-height: 1.6; backdrop-filter: blur(8px); }
 .art-note span { margin-right: 5px; color: #f2c886; font-style: normal; }
 .hero-sparkle { position: absolute; color: rgb(237 246 255 / 48%); }
 .sparkle-one { top: 35%; left: 4.5%; font-size: 18px; }
@@ -312,7 +314,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 1050px) {
   .hero { min-height: 735px; padding-right: 5vw; padding-left: 7vw; }
   .hero-content { width: 51%; }
-  .hero-art { top: 137px; right: -5vw; width: 56vw; height: 525px; }
+  .hero-art { top: 137px; right: -5vw; width: 56vw; height: auto; aspect-ratio: 1024 / 765; }
   .hero h1 { font-size: clamp(52px, 6vw, 68px); }
   .art-note { right: 4%; bottom: 18px; }
 }
@@ -334,9 +336,8 @@ a { color: inherit; text-decoration: none; }
   .event-details { max-width: 440px; margin-top: 25px; }
   .detail-value { font-size: 10px; }
   .hero-art { position: relative; top: auto; right: auto; width: min(100%, 560px); height: auto; aspect-ratio: 680 / 510; margin: 5px auto -43px; }
-  .meeting-illustration { inset: 0; }
-  .art-caption { top: 7%; right: 8%; font-size: 9px; }
-  .art-note { right: 0; bottom: 4%; padding: 10px 12px; font-size: 11px; }
+  .art-caption { top: 5%; right: 5%; font-size: 9px; }
+  .art-note { right: 4%; bottom: 4%; padding: 10px 12px; font-size: 11px; }
   .hero-sparkle { display: none; }
   .hero-bottom-wave { bottom: -205px; height: 260px; }
   .why-section { padding: 49px 23px 69px; }
