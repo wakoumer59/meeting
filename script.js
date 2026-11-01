@@ -7,15 +7,15 @@ const defaultEvent = {
 };
 
 const defaultEnglishEvent = {
-  title: "Grace Senior Citizens and Community Wellness Center",
-  description: "You are warmly invited to an introductory and discussion session about Grace Senior Citizens and Community Wellness Center.",
+  title: "Grace Senior Citizens & Community Wellness Center",
+  description: "You are warmly invited to an introductory and discussion session about Grace Senior Citizens & Community Wellness Center.",
 };
 
 const translations = {
   am: {
-    pageTitle: "Grace Senior Citizens & Community Hub — የግብዣ መልዕክት",
-    pageDescription: "Grace Senior Citizens & Community Hub — የመተዋወቂያና የምክክር መርሃ ግብር የግብዣ መልዕክት።",
-    homeLabel: "Grace Senior Citizens & Community Hub ዋና ገጽ",
+    pageTitle: "Grace Senior Citizens & Community Wellness Center — የግብዣ መልዕክት",
+    pageDescription: "Grace Senior Citizens & Community Wellness Center — የመተዋወቂያና የምክክር መርሃ ግብር የግብዣ መልዕክት።",
+    homeLabel: "Grace Senior Citizens & Community Wellness Center ዋና ገጽ",
     menuLabel: "የገጽ ማውጫን ክፈት",
     navLabel: "ዋና ማውጫ",
     navMeetingDate: "የመሰብሰቢያ ቀን",
@@ -53,7 +53,7 @@ const translations = {
     calendarButton: "ወደ ቀን መቁጠሪያ ጨምር",
     eventNote: "ሀሳብዎንና ምክርዎን እንዲያጋሩን በክብር እንጋብዝዎታለን።",
     contactKicker: "ያግኙን",
-    contactTitle: "Grace Senior Citizens & Community Hub",
+    contactTitle: "Grace Senior Citizens & Community Wellness Center",
     contactDescription: "በደስታ እናገኝዎታለን።",
     contactBethlehem: "ቤተልሄም",
     contactSara: "ሳራ ግዛው",
@@ -93,9 +93,9 @@ const translations = {
     locationAnnounced: "ይገለጻል",
   },
   en: {
-    pageTitle: "Grace Senior Citizens & Community Hub — Meeting Invitation",
-    pageDescription: "Join Grace Senior Citizens & Community Hub for an introductory and consultative program.",
-    homeLabel: "Grace Senior Citizens & Community Hub home",
+    pageTitle: "Grace Senior Citizens & Community Wellness Center — Meeting Invitation",
+    pageDescription: "Join Grace Senior Citizens & Community Wellness Center for an introductory and consultative program.",
+    homeLabel: "Grace Senior Citizens & Community Wellness Center home",
     menuLabel: "Open page navigation",
     navLabel: "Main navigation",
     navMeetingDate: "Meeting date",
@@ -105,7 +105,7 @@ const translations = {
     languageEnglish: "English",
     heroEyebrow: "Meeting invitation",
     heroWelcome: "",
-    artAlt: "Grace Senior Citizens Community Hub and Wellness Center with older adults gathered together",
+    artAlt: "Grace Senior Citizens & Community Wellness Center with older adults gathered together",
     programsTitle: "What we offer",
     programDayCare: "Day Care & Social Activities",
     programWellness: "Health & Wellness Support",
@@ -133,7 +133,7 @@ const translations = {
     calendarButton: "Add to calendar",
     eventNote: "We warmly invite you to join us and share your thoughts and advice.",
     contactKicker: "CONTACT",
-    contactTitle: "Grace Senior Citizens & Community Hub",
+    contactTitle: "Grace Senior Citizens & Community Wellness Center",
     contactDescription: "We'd be happy to hear from you.",
     contactBethlehem: "Bethlehem",
     contactSara: "Sara Gezaw",
@@ -350,7 +350,10 @@ function getLocalizedEventValue(key) {
   if (meeting[key] === defaultValue || meeting[key] === englishDefault) {
     return currentLanguage === "en" ? englishDefault : defaultValue;
   }
-  return meeting[key];
+  return meeting[key].replace(
+    /Grace Senior Citizens\s+(?:&|and)\s+Community\s+(?:Hub|Wellness Center)/gi,
+    "Grace Senior Citizens & Community Wellness Center",
+  );
 }
 
 function renderEvent() {
@@ -543,7 +546,7 @@ document.querySelector("#calendar-button").addEventListener("click", () => {
   const ics = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Grace Senior Citizens & Community Hub//Invitation//AM",
+    "PRODID:-//Grace Senior Citizens & Community Wellness Center//Invitation//AM",
     "BEGIN:VEVENT",
     `DTSTAMP:${toCalendarDate(new Date())}`,
     `DTSTART:${toCalendarDate(start)}`,
